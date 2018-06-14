@@ -7,9 +7,8 @@ const {
     deleteMerchandiseById
 } = require('../controllers/merchandise.controller')
 const { verifyToken } = require('../middlewares/token.middleware')
-const { multer, sendUploadToGCS } = require('../helpers/image.helper')
 
-router.post('/', verifyToken, multer.single('image'), sendUploadToGCS ,createMerchandise)
+router.post('/', verifyToken, createMerchandise)
 router.get('/', verifyToken, getAllMerchandise)
 router.get('/:id', verifyToken, getMerchandiseById)
 router.put('/:id', verifyToken, updateMerchandiseById)

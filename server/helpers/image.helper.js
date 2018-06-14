@@ -20,7 +20,7 @@ const sendUploadToGCS = (req, res, next) => {
     return next()
   }
 
-  const gcsname = Date.now() + req.file.originalname
+  const gcsname = req.file.originalname
   const file = bucket.file(gcsname)
 
   const stream = file.createWriteStream({
@@ -45,6 +45,19 @@ const sendUploadToGCS = (req, res, next) => {
   stream.end(req.file.buffer)
 }
 
+const deleteFileFromGCS = (filename) => {
+  storage
+    .bucket(CLOUD_BUCKET)
+    .file(filename)
+    .delete()
+    .then(() => {
+      return
+    })
+    .catch(err => {
+      throw (err)
+    })
+}
+
 const Multer = require('multer'),
 multer = Multer({
 storage: Multer.MemoryStorage,
@@ -57,5 +70,6 @@ limits: {
 module.exports = {
   getPublicUrl,
   sendUploadToGCS,
-  multer
+  multer,
+  deleteFileFromGCS
 }

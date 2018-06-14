@@ -18,7 +18,7 @@ const merchandiseSchema = mongoose.Schema({
         min: [2000, 'Harga merchandise setidaknya Rp 2.000']
     },
 
-    Image: String
+    image: String
 }, {
     timestamps: true
 })

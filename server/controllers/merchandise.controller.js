@@ -1,9 +1,7 @@
 const Merchandise = require('../models/Merchandise.model')
 
 module.exports = {
-    createMerchandise (req, res, next) {
-        req.body.image = req.file.cloudStoragePublicUrl
-        
+    createMerchandise (req, res, next) {        
         Merchandise.create(req.body)
         .then(merchandise => {
             res.status(200).json({

@@ -2,8 +2,6 @@ const Testimony = require('../models/testimony.model')
 
 module.exports = {
     createTestimony (req, res, next) {
-        req.body.image = req.file.cloudStoragePublicUrl
-        
         Testimony.create(req.body)
         .then(testimony => {
             res.status(200).json({
