@@ -2,6 +2,8 @@ const Testimony = require('../models/testimony.model')
 
 module.exports = {
     createTestimony (req, res, next) {
+        req.body.image = req.file.cloudStoragePublicUrl
+        
         Testimony.create(req.body)
         .then(testimony => {
             res.status(200).json({
@@ -25,7 +27,7 @@ module.exports = {
         .catch(next)
     },
 
-    getAllTesimony (req, res, next) {
+    getAllTestimony (req, res, next) {
         Testimony.find({})
         .then(testimonies => {
             res.status(200).json({

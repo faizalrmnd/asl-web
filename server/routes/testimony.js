@@ -7,9 +7,10 @@ const {
     deleteTestimonyById
 } = require('../controllers/testimony.controller')
 const { verifyToken } = require('../middlewares/token.middleware')
+const { multer, sendUploadToGCS } = require('../helpers/image.helper')
 
-router.post('/', verifyToken, createTestimony)
-router.get('/', verifyToken, getAllTesimony)
+router.post('/', verifyToken, multer.single('image'), sendUploadToGCS ,createTestimony)
+router.get('/', verifyToken, getAllTestimony)
 router.get('/:id', verifyToken, getTestimonyById)
 router.put('/:id', verifyToken, updateTestimonyById)
 router.delete('/:id', verifyToken, deleteTestimonyById)
