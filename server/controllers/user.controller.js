@@ -97,5 +97,20 @@ module.exports = {
                 message: 'Berhasil delete data admin'
             })
         }).catch(next)
-    }
+    },
+
+    verifyUser (req, res, next) {
+        let { id } = req.decoded
+
+        User.findById(id)
+        .then(user => {
+            res.status(200).json({
+                message: 'Berhasil verify token admin',
+                user: {
+                    name: user.name,
+                    email: user.email
+                }
+            })
+        }).catch(next)
+    },
 }

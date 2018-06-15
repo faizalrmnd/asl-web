@@ -13,6 +13,8 @@ const usersRouter = require('./routes/users')
 const testimonyRouter = require('./routes/testimony')
 const merchandiseRouter = require('./routes/merchandise')
 const imageRouter = require('./routes/image')
+const articleRouter = require('./routes/article')
+const aboutRouter = require('./routes/about')
 
 mongoose.connect('mongodb://localhost/asl')
 
@@ -38,10 +40,12 @@ app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 
 app.use('/', indexRouter)
-app.use('/user', usersRouter)
+app.use('/users', usersRouter)
 app.use('/testimony', testimonyRouter)
 app.use('/merchandise', merchandiseRouter)
 app.use('/image', imageRouter)
+app.use('/article', articleRouter)
+app.use('/about', aboutRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -49,6 +53,8 @@ app.use(function(req, res, next) {
 })
 
 // error handler
+// error handler masih butuh di rubah
+// buat handle error message lebih rapih
 app.use(function(err, req, res, next) {
   console.log(err)
 
