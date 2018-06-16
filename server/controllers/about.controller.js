@@ -12,10 +12,8 @@ module.exports = {
         .catch(next)
     },
 
-    updateAboutById (req, res, next) {
-        let id = req.params.id
-
-        About.findByIdAndUpdate(id, req.body, { new: true })
+    updateAbout (req, res, next) {
+        About.findOneAndUpdate({}, req.body, { new: true })
         .then(about => {
             res.status(200).json({
                 message: 'Berhasil mengubah data about',
@@ -25,37 +23,12 @@ module.exports = {
         .catch(next)
     },
 
-    getAllAbout(req, res, next) {
-        About.find({})
-        .then(abouts => {
-            res.status(200).json({
-                message: 'Berhasil mendapat semua about',
-                abouts
-            })
-        })
-        .catch(next)
-    },
-
-    getAboutById (req, res, next) {
-        let id = req.params.id
-        
-        About.findById(id)
+    getAbout (req, res, next) {        
+        About.findOne({})
         .then(about => {
             res.status(200).json({
                 message: 'Berhasil mendapat data about',
                 about
-            })
-        })
-        .catch(next)
-    },
-
-    deleteAboutById (req, res, next) {
-        let id = req.params.id
-        
-        About.findById(id)
-        .then(() => {
-            res.status(200).json({
-                message: 'Berhasil menghapus data about'
             })
         })
         .catch(next)

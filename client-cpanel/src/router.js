@@ -2,9 +2,10 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Register from './views/Register.vue'
-// import  from './views/.vue'
-// import  from './views/.vue'
-// import  from './views/.vue'
+import Admin from './views/Admin.vue'
+import Article from './views/Article.vue'
+import ArticleDetail from './components/ArticleDetail.vue'
+import Testimony from './views/Testimony.vue'
 // import  from './views/.vue'
 // import  from './views/.vue'
 // import  from './views/.vue'
@@ -31,19 +32,25 @@ export default new Router({
     {
       path: '/admin',
       name: 'admin',
-      component: Home
+      component: Admin
     },
 
     {
       path: '/artikel',
       name: 'artikel',
-      component: Home
+      component: Article
+    },
+
+    {
+      path: '/artikel/:id',
+      name: 'artikel-detail',
+      component: ArticleDetail
     },
 
     {
       path: '/testimoni',
       name: 'testimoni',
-      component: Home
+      component: Testimony
     },
 
     {
@@ -73,6 +80,12 @@ export default new Router({
     {
       path: '/about',
       name: 'about',
+      component: Home
+    },
+
+    {
+      path: '/gambar',
+      name: 'gambar',
       component: Home
     }
   ]

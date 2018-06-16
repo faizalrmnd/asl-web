@@ -1,42 +1,35 @@
 <template>
     <div class="pure-menu custom-restricted-width">
-        <h4 class="pure-menu-heading">Menu</h4>
+        <router-link class="pure-menu-heading" to="/"><h4>Home</h4></router-link>
 
         <ul class="pure-menu-list">
             <li class="pure-menu-item">
-                <router-link class="pure-menu-link" to="">Admin</router-link>
+                <router-link class="pure-menu-link" to="/admin">Admin</router-link>
             </li>
             <li class="pure-menu-item">
-                <router-link class="pure-menu-link" to="">Artikel</router-link>
+                <router-link class="pure-menu-link" to="/artikel">Artikel</router-link>
             </li>
             <li class="pure-menu-item">
-                <router-link class="pure-menu-link" to="">Testimoni</router-link>
+                <router-link class="pure-menu-link" to="/testimoni">Testimoni</router-link>
             </li>
             <li class="pure-menu-item">
-                <router-link class="pure-menu-link" to="">Product/Service</router-link>
+                <router-link class="pure-menu-link" to="/product">Product/Service</router-link>
             </li>
             <li class="pure-menu-item">
-                <router-link class="pure-menu-link" to="">Merchandise</router-link>
+                <router-link class="pure-menu-link" to="/merchandise">Merchandise</router-link>
             </li>
             <li class="pure-menu-item">
-                <router-link class="pure-menu-link" to="">Events</router-link>
+                <router-link class="pure-menu-link" to="/event">Events</router-link>
             </li>
             <li class="pure-menu-item">
-                <router-link class="pure-menu-link" to="">Enquiry</router-link>
+                <router-link class="pure-menu-link" to="/enquiry">Enquiry</router-link>
             </li>
             <li class="pure-menu-item">
-                <router-link class="pure-menu-link" to="">About</router-link>
+                <router-link class="pure-menu-link" to="/about">About</router-link>
+            </li>
+            <li class="pure-menu-item">
+                <router-link class="pure-menu-link" to="/gambar">Gambar</router-link>
             </li>
         </ul>
     </div>
 </template>
-
-<script>
-export default {
-
-}
-</script>
-
-<style>
-
-</style>

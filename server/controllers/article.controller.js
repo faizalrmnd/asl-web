@@ -1,7 +1,10 @@
 const Article = require('../models/article.model')
 
 module.exports = {
-    createArticle (req, res, next) {        
+    createArticle (req, res, next) {
+        let { id } = req.decoded
+        req.body.author = id
+                
         Article.create(req.body)
         .then(article => {
             res.status(200).json({
@@ -36,11 +39,11 @@ module.exports = {
         .catch(next)
     },
 
-    getArticleById (req, res, next) {
+    getArticleById (req, res, next) {        
         let id = req.params.id
         
         Article.findById(id)
-        .then(article => {
+        .then(article => {            
             res.status(200).json({
                 message: 'Berhasil mendapat data article',
                 article
