@@ -16,6 +16,11 @@ const imageRouter = require('./routes/image')
 const articleRouter = require('./routes/article')
 const aboutRouter = require('./routes/about')
 
+const serviceRouter = require('./routes/service')
+const eventRouter = require('./routes/event')
+const eventAppRouter = require('./routes/applicant')
+const contactRouter = require('./routes/contact')
+
 mongoose.connect('mongodb://localhost/asl')
 
 // test DB connection
