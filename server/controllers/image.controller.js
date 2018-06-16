@@ -9,10 +9,7 @@ module.exports = {
         let new_image = {name, url}
         Image.create(new_image)
         .then(image => {
-            res.status(200).json({
-                message: 'Berhasil upload gambar',
-                image
-            })
+            res.status(200).send(image.url)
         })
         .catch(next)
     },
@@ -28,5 +25,16 @@ module.exports = {
         } catch(err){
             next(err)
         }
+    },
+
+    getAllPicture (req, res, next) {
+        Image.find({})
+        .then(images => {
+            res.status(200).json({
+                message: 'Berhasil dapat semua gambar',
+                images
+            })
+        })
+        .catch(next)
     }
 }

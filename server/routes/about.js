@@ -1,17 +1,13 @@
 const router = require('express').Router()
 const {
     createAbout,
-    getAllAbout,
-    getAboutById,
-    updateAboutById,
-    deleteAboutById
+    getAbout,
+    updateAbout
 } = require('../controllers/about.controller')
 const { verifyToken } = require('../middlewares/token.middleware')
 
 router.post('/', verifyToken, createAbout)
-router.get('/', verifyToken, getAllAbout)
-router.get('/:id', verifyToken, getAboutById)
-router.put('/:id', verifyToken, updateAboutById)
-router.delete('/:id', verifyToken, deleteAboutById)
+router.get('/', verifyToken, getAbout)
+router.put('/', verifyToken, updateAbout)
 
 module.exports = router

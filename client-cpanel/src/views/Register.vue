@@ -81,7 +81,7 @@ export default {
             this.emailRegister =  ''
             this.passwordRegister =  ''
 
-            this.$store.dispatch('register', user)
+            this.$store.dispatch('admin/register', user)
             .then(() => {
                 this.$router.push('/')
             })
@@ -99,7 +99,7 @@ export default {
             this.emailLogin =  ''
             this.passwordLogin =  ''
 
-            this.$store.dispatch('login', user)
+            this.$store.dispatch('admin/login', user)
             .then(() => {
                 this.$router.push('/')
             })
@@ -111,7 +111,7 @@ export default {
 
     beforeCreate () {
     if (localStorage.getItem('adminToken')) {
-        this.$store.dispatch('verifyToken')
+        this.$store.dispatch('admin/verifyToken')
         .then(res => {
           this.$router.push('/')
         })

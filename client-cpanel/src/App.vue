@@ -8,7 +8,7 @@
         <div class="pure-u-1-3">
           <NavMenu/>
         </div>
-        <div class="pure-u-1-3">
+        <div class="pure-u-2-3">
           <router-view/>
         </div>
     </div>
@@ -26,13 +26,13 @@ export default {
 
   computed: {
     loggedIn () {
-      return this.$store.state.loggedIn
+      return this.$store.state.admin.loggedIn
     }
   },
 
   beforeCreate () {
     if (localStorage.getItem('adminToken')) {
-      this.$store.dispatch('verifyToken')
+      this.$store.dispatch('admin/verifyToken')
       .catch(err => {
         localStorage.removeItem('adminToken')
         alert('Tolong log in ulang')
