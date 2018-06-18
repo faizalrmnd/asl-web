@@ -30,6 +30,7 @@ module.exports = {
 
     getAllArticle(req, res, next) {
         Article.find({})
+        .populate('author', 'name email')
         .then(articles => {
             res.status(200).json({
                 message: 'Berhasil mendapat semua article',
@@ -43,6 +44,7 @@ module.exports = {
         let id = req.params.id
         
         Article.findById(id)
+        .populate('author', 'name email')
         .then(article => {            
             res.status(200).json({
                 message: 'Berhasil mendapat data article',

@@ -38,6 +38,8 @@ const sendUploadToGCS = (req, res, next) => {
     req.file.cloudStorageObject = gcsname
     file.makePublic().then(() => {
       req.file.cloudStoragePublicUrl = getPublicUrl(gcsname)
+      // set image url ke req.body.image
+      req.body.image = getPublicUrl(gcsname)
       next()
     })
   })
@@ -65,11 +67,27 @@ limits: {
     fileSize: 5 * 1024 * 1024
 }
 // dest: '../images'
+}),
+multerUpload = Multer({
+storage: Multer.MemoryStorage,
+limits: {
+    fileSize: 5 * 1024 * 1024
+},
+fileFilter (req, file, cb) {
+  if (!req.body.image) {
+    // skip image pas upload kalau tidak ada image
+    return cb(null, false)
+  }
+
+  cb(null, true)
+}
+// dest: '../images'
 })
 
 module.exports = {
   getPublicUrl,
   sendUploadToGCS,
   multer,
-  deleteFileFromGCS
+  deleteFileFromGCS,
+  multerUpload
 }

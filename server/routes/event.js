@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const images = require('../helpers/images')
+const images = require('../helpers/image.helper')
 const {
     createEvents,
     getAllEvents,
@@ -18,7 +18,7 @@ router.get('/', verifyToken, getAllEvents)
 router.get('/:id', verifyToken, getEventsById)
 router.put('/:id', 
   verifyToken, 
-  images.multer.single('image'), 
+  images.multerUpload.single('image'), 
   images.sendUploadToGCS,
   updateEventsById)
 router.delete('/:id', verifyToken, deleteEventsById)

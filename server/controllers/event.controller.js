@@ -2,11 +2,7 @@ const Events = require('../models/event.model')
 
 module.exports = {
     createEvents (req, res, next) {        
-        Events.create({
-            name: req.body.name,
-            description: req.body.description,
-            image: req.file.cloudStoragePublicUrl
-        })
+        Events.create(req.body)
         .then(event => {
             res.status(200).json({
                 message: 'Berhasil membuat event',
@@ -19,11 +15,7 @@ module.exports = {
     updateEventsById (req, res, next) {
         let id = req.params.id
 
-        Events.findByIdAndUpdate(id, {
-            name: req.body.name,
-            description: req.body.description,
-            image: req.file.cloudStoragePublicUrl
-        }, { new: true })
+        Events.findByIdAndUpdate(id, req.body, { new: true })
         .then(event => {
             res.status(200).json({
                 message: 'Berhasil mengubah data event',
@@ -35,10 +27,10 @@ module.exports = {
 
     getAllEvents(req, res, next) {
         Events.find({})
-        .then(service => {
+        .then(events => {
             res.status(200).json({
-                message: 'Berhasil mendapat semua service',
-                service
+                message: 'Berhasil mendapat semua events',
+                events
             })
         })
         .catch(next)
@@ -48,10 +40,10 @@ module.exports = {
         let id = req.params.id
         
         Events.findById(id)
-        .then(service => {
+        .then(event => {
             res.status(200).json({
-                message: 'Berhasil mendapat data service',
-                service
+                message: 'Berhasil mendapat data event',
+                event
             })
         })
         .catch(next)

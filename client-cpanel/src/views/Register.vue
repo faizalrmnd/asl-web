@@ -110,6 +110,8 @@ export default {
     },
 
     beforeCreate () {
+    // Buat verify token, ini token buatan kita atau orang lain
+    // kalau buatan kita, nanti simpan data user di store
     if (localStorage.getItem('adminToken')) {
         this.$store.dispatch('admin/verifyToken')
         .then(res => {

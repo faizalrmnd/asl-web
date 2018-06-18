@@ -18,7 +18,7 @@ const aboutRouter = require('./routes/about')
 
 const serviceRouter = require('./routes/service')
 const eventRouter = require('./routes/event')
-const eventAppRouter = require('./routes/applicant')
+const eventAppRouter = require('./routes/eventapplicant')
 const contactRouter = require('./routes/contact')
 
 mongoose.connect('mongodb://localhost/asl')
@@ -50,6 +50,10 @@ app.use('/testimony', testimonyRouter)
 app.use('/merchandise', merchandiseRouter)
 app.use('/image', imageRouter)
 app.use('/article', articleRouter)
+app.use('/service', serviceRouter)
+app.use('/event', eventRouter)
+app.use('/applicant', eventAppRouter)
+app.use('/contact', contactRouter)
 app.use('/about', aboutRouter)
 
 // catch 404 and forward to error handler

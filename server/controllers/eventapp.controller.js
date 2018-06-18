@@ -2,12 +2,7 @@ const Applicant = require('../models/eventapp.model')
 
 module.exports = {
     createApplicant (req, res, next) {
-        Applicant.create({
-          username: req.body.username,
-          email: req.body.email,
-          phone: req.body.phone,
-          eventId: req.body.eventId
-        })
+        Applicant.create(req.body)
         .then(applicant => {
           //perlu node mailer disini
             res.status(200).json({

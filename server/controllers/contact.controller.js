@@ -1,17 +1,13 @@
 const Contact = require('../models/contact.model')
 
 module.exports = {
-    createContact (req, res, next) {        
-        Contact.create({
-          user: req.body.user,
-          email: req.body.email,
-          phone: req.body.number,
-          content: req.body.content,
-          isResponded: false
-        })
+    createContact (req, res, next) {
+        req.body.isResponded = false
+
+        Contact.create(req.body)
         .then(contact => {
             res.status(200).json({
-                message: 'Berhasil membuat about',
+                message: 'Berhasil membuat contact',
                 contact
             })
         })
@@ -24,10 +20,10 @@ module.exports = {
       Contact.findByIdAndUpdate(id, {
         isResponded: true
       }, { new: true })
-      .then(article => {
+      .then(contact => {
           res.status(200).json({
-              message: 'Berhasil mengubah data article',
-              article
+              message: 'Berhasil mengubah data contact',
+              contact
           })
       })
       .catch(next)
