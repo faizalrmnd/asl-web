@@ -84,7 +84,7 @@ export default {
       })
     },
 
-    updateContact ({ commit }, payload) {
+    respondContact ({ commit }, payload) {
       return new Promise((resolve, reject) => {
         let id = payload.id
         delete payload.id
