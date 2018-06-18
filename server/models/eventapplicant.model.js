@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const eventAppSchema = mongoose.Schema({
-    username: {
+    name: {
       type: String,
       required: [true, 'Tolong masukan user/penulis untuk contact']
     },
@@ -13,7 +13,7 @@ const eventAppSchema = mongoose.Schema({
       type: Number,
       required: [true, 'Tolong nomer user/penulis untuk contact']
     },
-    eventId: {
+    event: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Events'
     }
