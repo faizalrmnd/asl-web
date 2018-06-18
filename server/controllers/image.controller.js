@@ -1,40 +1,9 @@
 const Image = require('../models/image.model')
-const { deleteFileFromGCS } = require('../helpers/image.helper')
 
 module.exports = {
-    uploadNewPicture (req, res, next) {
-        let name = req.file.originalname
+    sendPictureUrl (req, res, next) {
         let url = req.file.cloudStoragePublicUrl
 
-        let new_image = {name, url}
-        Image.create(new_image)
-        .then(image => {
-            res.status(200).send(image.url)
-        })
-        .catch(next)
-    },
-
-    async deleteImage (req, res, next) {
-        try {
-            let id = req.params.id
-            let image = await Image.findById(id)
-            await deleteFileFromGCS(image.name)
-            await Image.findByIdAndRemove(id)
-
-            res.status(200).send('Berhasil hapus gambar')
-        } catch(err){
-            next(err)
-        }
-    },
-
-    getAllPicture (req, res, next) {
-        Image.find({})
-        .then(images => {
-            res.status(200).json({
-                message: 'Berhasil dapat semua gambar',
-                images
-            })
-        })
-        .catch(next)
+        res.status(200).send(url)
     }
 }

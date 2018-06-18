@@ -54,8 +54,8 @@ export default new Router({
     },
 
     {
-      path: '/product',
-      name: 'product',
+      path: '/service',
+      name: 'service',
       component: Home
     },
 
@@ -80,12 +80,6 @@ export default new Router({
     {
       path: '/about',
       name: 'about',
-      component: Home
-    },
-
-    {
-      path: '/gambar',
-      name: 'gambar',
       component: Home
     }
   ]

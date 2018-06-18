@@ -1,16 +1,12 @@
 const router = require('express').Router()
 const {
-    uploadNewPicture,
-    deleteImage,
-    getAllPicture
+    sendPictureUrl
 } = require('../controllers/image.controller')
 const {
     multer,
     sendUploadToGCS,
 } = require('../helpers/image.helper')
 
-router.post('/', multer.single('file'), sendUploadToGCS, uploadNewPicture)
-router.get('/', getAllPicture)
-router.delete('/:id', deleteImage)
+router.post('/', multer.single('file'), sendUploadToGCS, sendPictureUrl)
 
 module.exports = router
