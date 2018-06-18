@@ -2,6 +2,10 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import About from './views/About.vue'
+import Articles from './views/Articles.vue'
+import Services from './views/Services.vue'
+import Merchandise from './views/Merchandise.vue'
+import ContactUs from './views/ContactUs.vue'
 
 Vue.use(Router)
 
@@ -16,6 +20,26 @@ export default new Router({
       path: '/about',
       name: 'about',
       component: About
+    },
+    {
+      path: '/articles',
+      name: 'articles',
+      component: Articles
+    },
+    {
+      path: '/services',
+      name: 'services',
+      component: Services
+    },
+    {
+      path: '/merchandise',
+      name: 'merchandise',
+      component: Merchandise
+    },
+    {
+      path: '/contactus',
+      name: 'contactus',
+      component: ContactUs
     }
   ]
 })

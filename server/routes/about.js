@@ -7,7 +7,7 @@ const {
 const { verifyToken } = require('../middlewares/token.middleware')
 
 router.post('/', verifyToken, createAbout)
-router.get('/', verifyToken, getAbout)
+router.get('/', getAbout)
 router.put('/', verifyToken, updateAbout)
 
 module.exports = router

@@ -10,7 +10,7 @@ const { sendUploadToGCS, multer, multerUpload } = require('../helpers/image.help
 const { verifyToken } = require('../middlewares/token.middleware')
 
 router.post('/', verifyToken, multer.single('image'), sendUploadToGCS, createMerchandise)
-router.get('/', verifyToken, multerUpload.single('image'), sendUploadToGCS, getAllMerchandise)
+router.get('/', multerUpload.single('image'), sendUploadToGCS, getAllMerchandise)
 router.get('/:id', verifyToken, getMerchandiseById)
 router.put('/:id', verifyToken, updateMerchandiseById)
 router.delete('/:id', verifyToken, deleteMerchandiseById)
