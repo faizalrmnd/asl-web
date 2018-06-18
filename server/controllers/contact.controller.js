@@ -1,5 +1,16 @@
 const Contact = require('../models/contact.model')
+const nodemailer = require("nodemailer")
 
+const user = process.env.EMAIL
+const pass = process.env.EMAIL_PASS
+
+var transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: `${user}`,
+        pass: `${pass}`
+    }
+});
 module.exports = {
     createContact (req, res, next) {
         req.body.isResponded = false
@@ -14,19 +25,29 @@ module.exports = {
         .catch(next)
     },
 
-    respondContactById (req, res, next) {
-      let id = req.params.id
+    async respondContactById (req, res, next) {
+        try {
+            let id = req.params.id
 
-      Contact.findByIdAndUpdate(id, {
-        isResponded: true
-      }, { new: true })
-      .then(contact => {
-          res.status(200).json({
-              message: 'Berhasil mengubah data contact',
-              contact
-          })
-      })
-      .catch(next)
+            let contact = await Contact.findByIdAndUpdate(id, {isResponded: true}, { new: true })
+
+            let mailOptions = {
+                from: `${user}`,
+                to: `${contact.email}`,
+                subject: req.body.subject,
+                text: req.body.message
+                }
+
+                await transporter.sendMail(mailOptions)
+
+                res.status(200).json({
+                    message: 'Berhasil membalas email',
+                    contact
+                })
+
+        } catch(error) {
+            next(error)
+        }      
   },
 
     getAllContact(req, res, next) {

@@ -12,14 +12,18 @@ const eventsSchema = mongoose.Schema({
     },
 
     date: {
-        type: String,
+        type: Date,
         required: [true, 'Harap masukan tanggal event diadakan']
     },
 
-    place: {
+    address: {
         type: String,
-        required: [true, 'Harap masukan tempat event diadakan']
+        required: [true, 'Harap masukan alamat event diadakan']
     },
+
+    latitude: String,
+
+    longitude: String,
 
     image: String
 }, {
