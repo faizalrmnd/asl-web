@@ -1,8 +1,8 @@
-const Applicant = require('../models/eventapp.model')
+const Applicant = require('../models/eventapplicant.model')
 const nodemailer = require("nodemailer")
 
 const user = process.env.EMAIL
-const pass = process.env.PASS
+const pass = process.env.EMAIL_PASS
 
 var transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -12,43 +12,38 @@ var transporter = nodemailer.createTransport({
     }
 });
 
-
 module.exports = {
-    createApplicant (req, res, next) {
-        Applicant.create(req.body)
-        .then(applicant => {
-          //------- node mailer disini
+    async createApplicant (req, res, next) {
+        try {
 
-            Applicant.findById(applicant._id)
-                .populate('Events')
-                .then(newApp => {
-                    let mailOptions = {
-                        from: `${user}`,
-                        to: `${newApp.email}`,
-                        subject: 'Insert Subject Here!',
-                        text: `Hello, ${newApp.name}! Anda baru saja mendaftar untuk event ${newApp.event.name}.
-                                Acara akan diadakan pada tanggal ${newApp.event.date}, di ${newApp.event.place}. 
-                                Mohon konfirmasi pembayaran ke ....`
-                    };
-                    transporter.sendMail(mailOptions, function(error, info){
-                        if (error) {
-                        console.log(error);
-                        } else {
-                        console.log('Email sent: ' + info.response);
-                        }
-                    })
-                })
+            let applicant = await Applicant.create(req.body)
+            let newApp = await applicant.populate({path: 'event'}).execPopulate()
+
+            let mailOptions = {
+                from: `${user}`,
+                to: `${newApp.email}`,
+                subject: `Pendaftaran  ${newApp.event.name} berhasil`,
+                text: `Hello, ${newApp.name}! Anda baru saja mendaftar untuk event ${newApp.event.name}.
+                        Acara akan diadakan pada tanggal ${newApp.event.date}, di ${newApp.event.place}. 
+                        Mohon konfirmasi pembayaran ke ....`
+            }
+
+            await transporter.sendMail(mailOptions)
 
             res.status(200).json({
-                message: 'Berhasil membuat applicant',
-                applicant
+                message: 'Berhasil mendaftar applicant',
+                applicants
             })
-        })
-        .catch(next)
+
+        } catch (err) {
+            next(err)
+        }
+        
     },
 
     getAllApplicant(req, res, next) {
         Applicant.find({})
+        .populate('event')
         .then(applicants => {
             res.status(200).json({
                 message: 'Berhasil mendapat semua applicant',
@@ -62,6 +57,7 @@ module.exports = {
         let id = req.params.id
         
         Applicant.findById(id)
+        .populate('event')
         .then(applicant => {
             res.status(200).json({
                 message: 'Berhasil mendapat data applicant',

@@ -7,7 +7,7 @@ const {
 } = require('../controllers/eventapp.controller')
 const { verifyToken } = require('../middlewares/token.middleware')
 
-router.post('/', verifyToken, createApplicant)
+router.post('/', createApplicant)
 router.get('/', verifyToken, getAllApplicant)
 router.get('/:id', verifyToken, getApplicantById)
 router.delete('/:id', verifyToken, deleteApplicantById)
