@@ -11,6 +11,16 @@ const eventsSchema = mongoose.Schema({
         required: [true, 'Harap masukan deskripsi event']
     },
 
+    date: {
+        type: String,
+        required: [true, 'Harap masukan tanggal event diadakan']
+    },
+
+    place: {
+        type: String,
+        required: [true, 'Harap masukan tempat event diadakan']
+    },
+
     image: String
 }, {
     timestamps: true
