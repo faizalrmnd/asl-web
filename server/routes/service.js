@@ -14,8 +14,8 @@ router.post('/',
   images.multer.single('image'), 
   images.sendUploadToGCS, 
   createService)
-router.get('/', verifyToken, getAllService)
-router.get('/:id', verifyToken, getServiceById)
+router.get('/', getAllService)
+router.get('/:id', getServiceById)
 router.put('/:id', 
   verifyToken, 
   images.multerUpload.single('image'), 

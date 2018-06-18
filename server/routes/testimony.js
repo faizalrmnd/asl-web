@@ -10,7 +10,7 @@ const { verifyToken } = require('../middlewares/token.middleware')
 const { multer, multerUpload, sendUploadToGCS } = require('../helpers/image.helper')
 
 router.post('/', verifyToken , multer.single('image'), sendUploadToGCS, createTestimony)
-router.get('/', verifyToken, multerUpload.single('image'), sendUploadToGCS, getAllTestimony)
+router.get('/', multerUpload.single('image'), sendUploadToGCS, getAllTestimony)
 router.get('/:id', verifyToken, getTestimonyById)
 router.put('/:id', verifyToken, updateTestimonyById)
 router.delete('/:id', verifyToken, deleteTestimonyById)
