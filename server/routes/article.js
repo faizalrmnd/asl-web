@@ -10,7 +10,7 @@ const { verifyToken } = require('../middlewares/token.middleware')
 
 router.post('/', verifyToken, createArticle)
 router.get('/', getAllArticle)
-router.get('/:id', verifyToken, getArticleById)
+router.get('/:id', getArticleById)
 router.put('/:id', verifyToken, updateArticleById)
 router.delete('/:id', verifyToken, deleteArticleById)
 
