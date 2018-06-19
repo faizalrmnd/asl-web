@@ -6,6 +6,11 @@ const articleSchema = mongoose.Schema({
         required: [true, 'Tolong masukan judul untuk artikel']
     },
     
+    image: {
+        type: String,
+        required: [true, 'Tolong masukan feature image untuk artikel']
+    },
+
     template: {
         type: String,
         required: [true, 'Tolong masukan template untuk artikel']
