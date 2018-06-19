@@ -15,7 +15,7 @@ router.post('/',
   images.sendUploadToGCS, 
   createEvents)
 router.get('/', getAllEvents)
-router.get('/:id', verifyToken, getEventsById)
+router.get('/:id', getEventsById)
 router.put('/:id', 
   verifyToken, 
   images.multerUpload.single('image'), 
