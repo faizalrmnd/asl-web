@@ -6,6 +6,8 @@ import Articles from './views/Articles.vue'
 import Services from './views/Services.vue'
 import Merchandise from './views/Merchandise.vue'
 import ContactUs from './views/ContactUs.vue'
+import ArticleDetail from './views/ArticleDetail.vue'
+import Events from './views/Events.vue'
 
 Vue.use(Router)
 
@@ -27,6 +29,11 @@ export default new Router({
       component: Articles
     },
     {
+      path: '/articles/:id',
+      name: 'article-detail',
+      component: ArticleDetail
+    },
+    {
       path: '/services',
       name: 'services',
       component: Services
@@ -40,6 +47,11 @@ export default new Router({
       path: '/contactus',
       name: 'contactus',
       component: ContactUs
+    },
+    {
+      path: '/events',
+      name: 'events',
+      component: Events
     }
   ]
 })
