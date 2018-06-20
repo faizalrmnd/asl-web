@@ -1,43 +1,48 @@
 <template>
     <div>
-        <div class="pure-menu pure-menu-horizontal">
-            <ul class="pure-menu-list">
-                <li class="pure-menu-item"><a class="pure-menu-link" @click="selectedMenu = 0">Lihat Semua artikel</a></li>
-                <li class="pure-menu-item"><a class="pure-menu-link" @click="selectedMenu = 1">Buat artikel</a></li>                
-            </ul>
-        </div>        
-        <table class="pure-table pure-table-horizontal" v-if="selectedMenu === 0">
+        <ul class="nav">
+            <li class="nav-item"><a class="nav-link" @click="selectedMenu = 0">Lihat Semua artikel</a></li>
+            <li class="nav-item"><a class="nav-link" @click="selectedMenu = 1">Buat artikel</a></li>                
+        </ul>     
+        <table class="table" v-if="selectedMenu === 0">
             <thead>
                 <tr>
-                    <th>#</th>
-                    <th>Title</th>
-                    <th>Options</th>
+                    <th scope="col">#</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Options</th>
                 </tr>
             </thead>
 
             <tbody>
                 <tr v-for="(article, index) in articles" :key="index">
-                    <td>{{ index }}</td>
+                    <th scope="row">{{ index }}</th>
                     <td>{{ article.title }}</td>
                     <td>
-                        <div class="pure-g">
-                            <div class="pure-u-1-2"><router-link :to="{ name:'artikel-detail', params:{ id: article._id } }">Lihat</router-link></div>
-                            <div class="pure-u-1-2"><router-link :to="{ name:'artikel-detail', params:{ id: article._id, change: true } }">Ubah</router-link></div>
-                            <div class="pure-u-1-2"><a @click="deleteArticle(article)">Hapus</a></div>
+                        <div class="row">
+                            <div class="col-4"><router-link :to="{ name:'artikel-detail', params:{ id: article._id } }">Lihat</router-link></div>
+                            <div class="col-4"><router-link :to="{ name:'artikel-detail', params:{ id: article._id, change: true } }">Ubah</router-link></div>
+                            <div class="col-4"><a @click="deleteArticle(article)">Hapus</a></div>
                         </div>
                     </td>
                 </tr>
             </tbody>
         </table>
         <div v-else-if="selectedMenu === 1">
-            <form class="pure-form pure-form-stacked">
-                <fieldset>
-                    <input type="text" placeholder="Masukan Judul" v-model="title">
+            <form>
+                <div class="form-group">
+                    <label>Judul Artikel</label>
+                    <input type="text" class="form-control" placeholder="Masukan Judul" v-model="title">
+                </div>
+                <div class="form-group">
+                    <label>Featured Image</label>
+                    <input type="file" accept="image/*" class="form-control" placeholder="Masukan Featured image" @change="saveImage">
+                </div>
 
+                <div class="form-group">
                     <wysiwyg v-model="articleTemplate" />
+                </div>
 
-                    <button class="pure-button pure-button-primary" @click.prevent="createArticle">Submit</button>
-                </fieldset>
+                <button class="btn btn-primary" @click.prevent="createArticle">Submit</button>
             </form>            
         </div>
     </div>
@@ -51,19 +56,21 @@ export default {
         return {
             selectedMenu: 0,
             articleTemplate: '',
-            title: ''
+            title: '',
+            image: ''
         }
     },
 
     methods: {
         createArticle () {
-            let payload = {
-                title: this.title,
-                template: this.articleTemplate
-            }
+            let payload = new FormData()
+            payload.append('title', this.title)
+            payload.append('template', this.articleTemplate)
+            payload.append('image', this.image)
 
             this.title = ''
             this.articleTemplate = ''
+            this.image = ''
 
             this.$store.dispatch('article/createArticle', payload)
             .then(message => {
@@ -72,6 +79,17 @@ export default {
             .catch(message => {
                 alert(message)
             })
+        },
+
+        saveImage(event) {
+            // Reference to the DOM input element
+            var input = event.target            
+            
+            // Ensure that you have a file before attempting to read it
+            if (input.files && input.files[0]) {
+                console.log(input.files[0])                
+                this.image = input.files[0]
+            }
         },
 
         deleteArticle (article) {

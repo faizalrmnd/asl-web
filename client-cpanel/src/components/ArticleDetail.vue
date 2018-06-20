@@ -1,13 +1,17 @@
 <template>
     <div>
         <div v-if="this.$route.params.change">
-            <form class="pure-form pure-form-stacked">
+            <form>
                 <fieldset>
-                    <input type="text" placeholder="Masukan Judul" v-model="title">
+                    <div class="form-group">
+                        <label>Judul Artikel</label>
+                        <input type="text" class="form-control" placeholder="Masukan Judul" v-model="title">
+                    </div>
+                    <div class="form-group">
+                        <wysiwyg v-model="articleTemplate" />
+                    </div>
 
-                    <wysiwyg v-model="articleTemplate" />
-
-                    <button class="pure-button pure-button-primary" @click.prevent="updateArticle">Submit</button>
+                    <button class="btn btn-primary" @click.prevent="updateArticle">Submit</button>
                 </fieldset>
             </form>
         </div>

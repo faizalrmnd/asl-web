@@ -4,11 +4,11 @@
       <router-view/>
     </div>
     <div v-else>
-      <div class="pure-g">
-        <div class="pure-u-1-3">
+      <div class="row">
+        <div class="col-3">
           <NavMenu/>
         </div>
-        <div class="pure-u-2-3">
+        <div class="col-9">
           <router-view/>
         </div>
     </div>
