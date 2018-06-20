@@ -6,6 +6,7 @@
       <router-link to="/articles">Articles</router-link> |
       <router-link to="/services">Services</router-link> |
       <router-link to="/merchandise">Merchandise</router-link> |
+      <router-link to="/events">Events</router-link> |
       <router-link to="/contactus">Contact Us</router-link>
     </div>
     <router-view/>

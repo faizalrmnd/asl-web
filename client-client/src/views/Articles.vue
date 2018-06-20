@@ -1,22 +1,16 @@
 <template>
   <div>
     <h1>This is articles page</h1>
-    {{ articles }}
+    <articleList/>
   </div>
 </template>
 
 <script>
+import articleList from '@/components/articleList.vue'
+
 export default {
-  computed: {
-    articles () {
-      return this.$store.state.article.articles
-    }
-  },
-  beforeCreate () {
-    this.$store.dispatch('article/getAllArticles')
-      .catch(message => {
-        alert(message)
-      })
+  components: {
+    articleList
   }
 }
 </script>
