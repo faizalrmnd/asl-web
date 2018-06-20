@@ -14,8 +14,7 @@ const merchandiseSchema = mongoose.Schema({
 
     price: {
         type: Number,
-        required: [true, 'Harap masukan harga merchandise'],
-        min: [2000, 'Harga merchandise setidaknya Rp 2.000']
+        required: [true, 'Harap masukan harga merchandise']
     },
 
     image: String
