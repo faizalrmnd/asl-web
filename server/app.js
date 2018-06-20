@@ -21,7 +21,8 @@ const eventRouter = require('./routes/event')
 const eventAppRouter = require('./routes/eventapplicant')
 const contactRouter = require('./routes/contact')
 
-mongoose.connect('mongodb://localhost/asl')
+// mongoose.connect('mongodb://localhost/asl')
+mongoose.connect(`mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@ds163530.mlab.com:63530/asldb`)
 
 // test DB connection
 const db = mongoose.connection
