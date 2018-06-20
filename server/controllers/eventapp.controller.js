@@ -32,7 +32,7 @@ module.exports = {
 
             res.status(200).json({
                 message: 'Berhasil mendaftar applicant',
-                applicants
+                newApp
             })
 
         } catch (err) {
