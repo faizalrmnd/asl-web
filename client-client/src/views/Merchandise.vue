@@ -1,6 +1,8 @@
 <template>
   <div>
-    <h1>This is Merchandise page</h1>
+    <div class="route-header">
+      <h1 class="title animated slideInDown">Merchandise</h1>
+    </div>
     <div class="cards">
       <div class="card" v-for="(merch, index) in merchandises" v-bind:key='index' style="width: 18rem;">
         <img class="card-img-top" :src="merch.image" alt="Card image cap">

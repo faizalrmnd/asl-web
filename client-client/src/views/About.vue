@@ -1,7 +1,13 @@
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
-    <span v-html="about"></span>
+    <div class="route-header">
+      <h1 class="title animated slideInDown">About</h1>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="about-text" v-html="about"></div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -21,6 +27,8 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+  .about-text {
+    text-align: left
+  }
 </style>
