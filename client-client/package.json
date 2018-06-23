@@ -10,7 +10,11 @@
   "dependencies": {
     "axios": "^0.18.0",
     "vue": "^2.5.16",
+    "vue-currency-filter": "^2.2.6",
+    "vue-moment": "^4.0.0",
     "vue-router": "^3.0.1",
+    "vue-scroll-reveal": "^1.0.8",
+    "vue-truncate-filter": "^1.1.7",
     "vuex": "^3.0.1"
   },
   "devDependencies": {

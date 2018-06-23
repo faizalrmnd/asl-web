@@ -53,5 +53,12 @@ export default new Router({
       name: 'events',
       component: Events
     }
-  ]
+  ],
+  mode: 'history',
+  scrollBehavior: (to, from, savedPosition) => {
+    return {
+      x: 0,
+      y: 0
+    }
+  }
 })

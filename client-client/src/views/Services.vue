@@ -1,14 +1,16 @@
 <template>
   <div>
-    <h1>This is service page</h1>
-    <div class="cards">
-      <div class="card" v-for="(service, index) in services" v-bind:key='index' style="width: 18rem;">
-        <img class="card-img-top" :src="service.image" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">{{ service.name }}</h5>
-          <p class="card-text">{{ service.description }}</p>
-          <!-- <router-link class="btn btn-primary" :to="{ name: 'article-detail', params: { id: article._id } }">Primary</router-link> -->
-          <!-- <router-link :to="{ name: 'article-detail', params: { id: article._id } }"></router-link> -->
+    <div class="route-header">
+      <h1 class="title animated fadeIn">Services</h1>
+    </div>
+    <div class="container ">
+      <div class="row services flex-wrapper" v-for="(service, index) in services" v-bind:key="index">
+        <div class="col-md-4 service-image" :style="{ backgroundImage: 'url(\'' + service.image + '\')' }">
+          <img :src="service.image" alt="">
+        </div>
+        <div class="col-md-8 service-text">
+          <h2>{{service.name}}</h2>
+          <p>{{service.description}}</p>
         </div>
       </div>
     </div>
@@ -32,12 +34,33 @@ export default {
 </script>
 
 <style scoped>
-  .cards {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
+  .services {
+    text-align: left;
+    width: 100%;
   }
-  .card {
-    margin: 5px;
+  .services img {
+    display: none;
+  }
+  .service-image {
+    /* min-height: 200px; */
+    background-size: cover;
+    background-position: top;
+    padding: 0;
+  }
+  .service-image img {
+    width: 100%;
+  }
+  .service-text {
+    padding: 40px;
+    min-height: 350px;
+    background-color: white;
+    margin-bottom: 0;
+    border: 2px solid #e8e8e8;
+    border-left: 0px solid;
+    border-radius: 0px 5px 5px 0px;
+    height: 100%;
+  }
+  h2 {
+    font-weight: 900;
   }
 </style>

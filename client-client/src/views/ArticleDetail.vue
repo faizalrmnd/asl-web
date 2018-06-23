@@ -1,7 +1,9 @@
 <template>
   <div>
-    <h1>Ini Article detail</h1>
-    {{ article }}
+    <div class="route-header single-article" v-bind:style="{ 'background-image': 'url(' + article.image + ')' }">
+      <h1 class="title animated fadeIn">{{ article.title }}</h1>
+    </div>
+    <div class="article-content container" v-html="article.template"></div>
   </div>
 </template>
 
@@ -21,6 +23,12 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+.single-article .title {
+  margin: 0;
+  background-color: rgba(0,0,0,0.8);
+}
+.article-content {
+  text-align: left;
+}
 </style>
