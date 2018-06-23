@@ -8,7 +8,9 @@
         <h1>Artistik Salindia Lima</h1>
         <h5>Lorem ipsum dolor sit amet, pharetra platea congue nec netus quis, lorem mi dolor. </h5>
         <br>
-        <button type="button" class="btn btn-primary animated slideInUp">More Details</button>
+        <a href="#what-we-do">
+          <button type="button" class="btn btn-primary animated slideInUp">More Details</button>
+        </a>
       </div>
     </div>
   </section>

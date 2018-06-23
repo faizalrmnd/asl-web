@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="route-header">
-      <h1 class="title animated slideInDown">Events</h1>
+      <h1 class="title animated fadeIn">Events</h1>
     </div>
   </div>
 </template>

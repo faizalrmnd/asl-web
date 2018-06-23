@@ -4,30 +4,30 @@
       <img src="../assets/img/logo.png" alt="" class="navbar-logo">
     </router-link>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+      <img src="../assets/img/menu.svg" class="navbar-toggler-icon">
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto ml-auto">
-        <router-link to="/" class="nav-item" tag="li">
-          <a class="nav-link">Home</a>
+        <router-link to="/" class="nav-item" tag="li" exact>
+          <a class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show">Home</a>
         </router-link>
         <router-link to="/about" class="nav-item" tag="li">
-          <a class="nav-link">About</a>
+          <a class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show">About</a>
         </router-link>
         <router-link to="/articles" class="nav-item" tag="li">
-          <a class="nav-link">Articles</a>
+          <a class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show">Articles</a>
         </router-link>
         <router-link to="/services" class="nav-item" tag="li">
-          <a class="nav-link">Services</a>
+          <a class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show">Services</a>
         </router-link>
         <router-link to="/merchandise" class="nav-item" tag="li">
-          <a class="nav-link">Merchandise</a>
+          <a class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show">Merchandise</a>
         </router-link>
         <router-link to="/events" class="nav-item" tag="li">
-          <a class="nav-link">Events</a>
+          <a class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show">Events</a>
         </router-link>
         <router-link to="/contactus" class="nav-item" tag="li">
-          <a class="nav-link">Contact Us</a>
+          <a class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show">Contact Us</a>
         </router-link>
       </ul>
     </div>
@@ -58,6 +58,10 @@ export default {
 <style>
 .navbar-logo {
   width: 50px;
+}
+
+.navbar-dark .navbar-toggler-icon {
+  background-image: none;
 }
 
 .navbar {
@@ -91,5 +95,12 @@ nav.navbar.scrolled {
   left: 50%;
   transform: translateX(-50%);
   padding: 40px 0;
+}
+
+.router-link-active a {
+  font-weight: 900;
+  opacity: 1;
+  border-top: 0px solid;
+  color: #fbd233 !important;
 }
 </style>

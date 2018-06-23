@@ -1,5 +1,5 @@
 <template>
-  <section class="container what-we-do">
+  <section class="container what-we-do" id="what-we-do">
     <div class="row">
       <div class="col-md-12">
         <h2 class="title">What we do</h2>

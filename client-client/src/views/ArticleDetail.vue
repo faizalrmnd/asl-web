@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="route-header single-article" v-bind:style="{ 'background-image': 'url(' + article.image + ')' }">
-      <h1 class="title">{{ article.title }}</h1>
+      <h1 class="title animated fadeIn">{{ article.title }}</h1>
     </div>
     <div class="article-content container" v-html="article.template"></div>
   </div>

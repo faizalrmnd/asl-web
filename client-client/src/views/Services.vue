@@ -1,11 +1,11 @@
 <template>
   <div>
     <div class="route-header">
-      <h1 class="title animated slideInDown">Services</h1>
+      <h1 class="title animated fadeIn">Services</h1>
     </div>
     <div class="container ">
-      <div class="row services" v-for="(service, index) in services" v-bind:key="index">
-        <div class="col-md-4 service-image" v-bind:style="{ 'background-image': 'url(' + service.image + ')' }">
+      <div class="row services flex-wrapper" v-for="(service, index) in services" v-bind:key="index">
+        <div class="col-md-4 service-image" :style="{ backgroundImage: 'url(\'' + service.image + '\')' }">
           <img :src="service.image" alt="">
         </div>
         <div class="col-md-8 service-text">
@@ -38,10 +38,13 @@ export default {
     text-align: left;
     width: 100%;
   }
+  .services img {
+    display: none;
+  }
   .service-image {
-    min-height: 200px;
+    /* min-height: 200px; */
     background-size: cover;
-    background-position: center;
+    background-position: top;
     padding: 0;
   }
   .service-image img {
@@ -49,11 +52,13 @@ export default {
   }
   .service-text {
     padding: 40px;
+    min-height: 350px;
     background-color: white;
-    margin-bottom: 90px;
+    margin-bottom: 0;
     border: 2px solid #e8e8e8;
     border-left: 0px solid;
     border-radius: 0px 5px 5px 0px;
+    height: 100%;
   }
   h2 {
     font-weight: 900;

@@ -56,7 +56,7 @@ export default {
 }
 
 .company-desc h1 {
-  font-weight: bold;
+  font-weight: 900;
 }
 
 .btn-primary {
