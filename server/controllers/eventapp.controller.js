@@ -67,6 +67,20 @@ module.exports = {
         .catch(next)
     },
 
+    getApplicantsByEventId (req, res, next) {
+        let eventId = req.params.id
+        
+        Applicant.find({event: eventId})
+        .populate('event')
+        .then(applicants => {
+            res.status(200).json({
+                message: 'Berhasil mendapat data applicant',
+                applicants
+            })
+        })
+        .catch(next)
+    },
+
     deleteApplicantById (req, res, next) {
         let id = req.params.id
         

@@ -1,54 +1,49 @@
 <template>
     <div>
-        <div class="pure-g">
-            <div class="pure-u-1-2">
+        <div class="row">
+            <div class="col-6">
                 <form class="pure-form pure-form-aligned">
                     <fieldset>
                         <h1>Register</h1>
 
-                        <div class="pure-control-group">
+                        <div class="form-group">
                             <label for="name">Username</label>
-                            <input type="text" placeholder="Username" v-model="userName">
-                            <span class="pure-form-message-inline">This is a required field.</span>
+                            <input type="text" class="form-control" placeholder="Username" v-model="userName">
                         </div>
 
-                        <div class="pure-control-group">
+                        <div class="form-group">
                             <label for="email">Email Address</label>
-                            <input type="email" placeholder="Email Address" v-model="emailRegister">
-                            <span class="pure-form-message-inline">This is a required field.</span>
+                            <input type="email" class="form-control" placeholder="Email Address" v-model="emailRegister">
                         </div>
 
-                        <div class="pure-control-group">
+                        <div class="form-group">
                             <label for="password">Password</label>
-                            <input type="password" placeholder="Password" v-model="passwordRegister">
-                            <span class="pure-form-message-inline">This is a required field.</span>
+                            <input type="password" class="form-control" placeholder="Password" v-model="passwordRegister">
                         </div>
 
                         <div class="pure-controls">
-                            <button class="pure-button pure-button-primary" @click.prevent="register">Submit</button>
+                            <button class="btn btn-primary" @click.prevent="register">Submit</button>
                         </div>
                     </fieldset>
                 </form>
             </div>
-            <div class="pure-u-1-2">
+            <div class="col-6">
                 <form class="pure-form pure-form-aligned">
                     <fieldset>
                         <h1>Log In</h1>
 
-                        <div class="pure-control-group">
+                        <div class="form-group">
                             <label for="email">Email Address</label>
-                            <input type="email" placeholder="Email Address" v-model="emailLogin">
-                            <span class="pure-form-message-inline">This is a required field.</span>
+                            <input type="email" class="form-control" placeholder="Email Address" v-model="emailLogin">
                         </div>
 
-                        <div class="pure-control-group">
+                        <div class="form-group">
                             <label for="password">Password</label>
-                            <input type="password" placeholder="Password" v-model="passwordLogin">
-                            <span class="pure-form-message-inline">This is a required field.</span>
+                            <input type="password" class="form-control" placeholder="Password" v-model="passwordLogin">
                         </div>
 
                         <div class="pure-controls">
-                            <button class="pure-button pure-button-primary" @click.prevent="login">Submit</button>
+                            <button class="btn btn-primary" @click.prevent="login">Submit</button>
                         </div>
                     </fieldset>
                 </form>

@@ -6,11 +6,12 @@ import Admin from './views/Admin.vue'
 import Article from './views/Article.vue'
 import ArticleDetail from './components/ArticleDetail.vue'
 import Testimony from './views/Testimony.vue'
-// import  from './views/.vue'
-// import  from './views/.vue'
-// import  from './views/.vue'
-// import  from './views/.vue'
-// import  from './views/.vue'
+import Service from './views/Service.vue'
+import Merchandise from './views/Merchandise.vue'
+import Events from './views/Event.vue'
+import EventDetail from './components/EventDetail.vue'
+import Enquiry from './views/Enquiry.vue'
+import About from './views/About.vue'
 
 Vue.use(Router)
 
@@ -56,31 +57,37 @@ export default new Router({
     {
       path: '/service',
       name: 'service',
-      component: Home
+      component: Service
     },
 
     {
       path: '/merchandise',
       name: 'merchandise',
-      component: Home
+      component: Merchandise
     },
 
     {
       path: '/event',
       name: 'event',
-      component: Home
+      component: Events
+    },
+
+    {
+      path: '/event/:id',
+      name: 'event-detail',
+      component: EventDetail
     },
 
     {
       path: '/enquiry',
       name: 'enquiry',
-      component: Home
+      component: Enquiry
     },
 
     {
       path: '/about',
       name: 'about',
-      component: Home
+      component: About
     }
   ]
 })

@@ -5,12 +5,17 @@ export default {
 
   state: {
     applicants: [],
-    selectedApplicant: {}
+    selectedApplicant: {},
+    applicantsOnEvent: []
   },
 
   mutations: {
     setAllApplicant (state, applicants) {
       state.applicants = [...applicants]
+    },
+
+    setApplicantsOnEvent (state, applicants) {
+      state.applicantsOnEvent = [...applicants]
     },
 
     setSelectedApplicant (state, applicant) {
@@ -59,6 +64,23 @@ export default {
         })
           .then(res => {
             commit('setSelectedApplicant', res.data.applicant)
+            resolve(res.data.message)
+          })
+          .catch(err => {
+            reject(err.message)
+          })
+      })
+    },
+
+    getApplicantsByEventId ({ commit }, id) {
+      return new Promise((resolve, reject) => {
+        axios.get(`http://localhost:3000/applicant/event/${id}`, {
+          headers: {
+            token: localStorage.getItem('adminToken')
+          }
+        })
+          .then(res => {
+            commit('setApplicantsOnEvent', res.data.applicants)
             resolve(res.data.message)
           })
           .catch(err => {
