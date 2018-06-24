@@ -1,13 +1,10 @@
 const router = require('express').Router()
 const {
-    createAbout,
-    getAbout,
-    updateAbout
+    createUpdateAbout,
+    getAbout
 } = require('../controllers/about.controller')
 const { verifyToken } = require('../middlewares/token.middleware')
 
-router.post('/', verifyToken, createAbout)
+router.post('/', verifyToken, createUpdateAbout)
 router.get('/', getAbout)
-router.put('/', verifyToken, updateAbout)
-
 module.exports = router

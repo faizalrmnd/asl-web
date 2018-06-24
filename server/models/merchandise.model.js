@@ -8,8 +8,7 @@ const merchandiseSchema = mongoose.Schema({
 
     description: {
         type: String,
-        required: [true, 'Harap masukan deskripsi merchandise'],
-        minlength: [12, 'Masukan descripsi setidaknya sepanjang 12 karakter']
+        required: [true, 'Harap masukan deskripsi merchandise']
     },
 
     price: {

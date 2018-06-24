@@ -31,9 +31,9 @@ export default {
       })
     },
 
-    updateAbout ({ commit }, payload) {
+    createUpdateAbout ({ commit }, payload) {
       return new Promise((resolve, reject) => {
-        axios.put(`http://localhost:3000/about`, payload, {
+        axios.post(`http://localhost:3000/about`, payload, {
           headers: {
             token: localStorage.getItem('adminToken')
           }

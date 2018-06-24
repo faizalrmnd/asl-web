@@ -87,14 +87,21 @@ export default {
     respondContact ({ commit }, payload) {
       return new Promise((resolve, reject) => {
         let id = payload.id
+        let email = {
+          subject: payload.subject,
+          message: payload.message
+        }
         delete payload.id
-        axios.put(`http://localhost:3000/contact/${id}`, payload, {
+        delete payload.subject
+        delete payload.message
+
+        axios.put(`http://localhost:3000/contact/${id}`, email, {
           headers: {
             token: localStorage.getItem('adminToken')
           }
         })
           .then(res => {
-            commit('updateContact', res.data.contact)
+            commit('deleteContact', payload)
             resolve(res.data.message)
           })
           .catch(err => {

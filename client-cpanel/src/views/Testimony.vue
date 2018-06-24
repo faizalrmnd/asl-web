@@ -50,7 +50,7 @@
                                     <div class="form-group">
                                         <label>Gambar</label>
                                         <img :src="selectedTestimony.image">
-                                        <input type="file" accept="image/*" class="form-control" placeholder="Masukan Gambar" @change="saveImage"/>
+                                        <input type="file" accept="image/*" class="form-control" placeholder="Masukan Gambar" @change="updateImage"/>
                                     </div>
                             </div>
                             <div class="modal-footer">
@@ -67,19 +67,18 @@
         <div v-else-if="selectedMenu === 1">
             <div class="form-group">
                 <label>Nama</label>
-                <input type="text" class="form-control" v-model="selectedTestimony.testimoner"/>
+                <input type="text" class="form-control" v-model="testimoner"/>
             </div>
             <div class="form-group">
                 <label>Testimoni</label>
-                <textarea cols="30" rows="10" class="form-control" v-model="selectedTestimony.testimony"></textarea>
+                <textarea cols="30" rows="10" class="form-control" v-model="testimony"></textarea>
             </div>
             <div class="form-group">
                 <label>Asal</label>
-                <input type="text" class="form-control" v-model="selectedTestimony.from"/>
+                <input type="text" class="form-control" v-model="from"/>
             </div>
             <div class="form-group">
                 <label>Gambar</label>
-                <img :src="selectedTestimony.image">
                 <input type="file" accept="image/*" class="form-control" placeholder="Masukan Gambar" @change="saveImage"/>
             </div>
             <button class="btn btn-primary" @click="createTestimony">Simpan</button>
@@ -113,20 +112,67 @@ export default {
             }
         },
 
+        updateImage(event) {
+            // Reference to the DOM input element
+            var input = event.target            
+            
+            // Ensure that you have a file before attempting to read it
+            if (input.files && input.files[0]) {
+                console.log(input.files[0])                
+                this.selectedTestimony.image = input.files[0]
+            }
+        },
+
         setSelected (testimony) {
             this.selectedTestimony = {...testimony}
         },
 
         createTestimony () {
+            let payload = new FormData()
+            payload.append('testimoner', this.testimoner)
+            payload.append('testimony', this.testimony)
+            payload.append('from', this.from)
+            payload.append('image', this.image)
 
+            this.testimoner = ''
+            this.testimony = ''
+            this.from = ''
+            this.image = ''
+
+            this.$store.dispatch('testimony/createTestimony', payload)
+            .then(msg => {
+                alert(msg)
+            })
+            .catch(msg => {
+                alert(msg)
+            })
         },
 
         updateTestimony () {
+            let payload = new FormData()
+            payload.append('testimoner', this.selectedTestimony.testimoner)
+            payload.append('testimony', this.selectedTestimony.testimony)
+            payload.append('from', this.selectedTestimony.from)
+            payload.append('image', this.selectedTestimony.image)
+            payload.append('id', this.selectedTestimony._id)
 
+            this.$store.dispatch('testimony/updateTestimony', payload)
+            .then(msg => {
+                alert(msg)
+            })
+            .catch(msg => {
+                alert(msg)
+            })
         },
 
-        deleteTestimony () {
-            
+        deleteTestimony (testimony) {
+            this.$store.dispatch('testimony/deleteTestimony', testimony)
+            .then(msg => {
+                alert(msg)
+            })
+            .catch(msg => {
+                alert(msg)
+            })
         }
     },
 
