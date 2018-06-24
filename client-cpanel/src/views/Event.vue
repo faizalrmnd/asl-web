@@ -235,10 +235,7 @@ export default {
             payload.append('latitude', this.selectedEvent.latitude)
             payload.append('longitude', this.selectedEvent.longitude)
             payload.append('image', this.selectedEvent.image)
-            payload.append('id', this.selectedEvent._id)
-            
-            console.log(payload.get('name'))
-            
+            payload.append('id', this.selectedEvent._id)            
 
             this.$store.dispatch('event/updateEvent', payload)
             .then(message => {
@@ -250,7 +247,7 @@ export default {
         },
 
         deleteEvent (event) {
-            this.$store.dispatch('event/deleteEvent', article)
+            this.$store.dispatch('event/deleteEvent', event)
             .then(message => {
                 alert(message)
             })

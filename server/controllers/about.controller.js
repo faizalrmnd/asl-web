@@ -1,26 +1,25 @@
 const About = require('../models/about.model')
 
 module.exports = {
-    createAbout (req, res, next) {        
-        About.create(req.body)
-        .then(about => {
-            res.status(200).json({
-                message: 'Berhasil membuat about',
-                about
-            })
-        })
-        .catch(next)
-    },
+    async createUpdateAbout (req, res, next) {
+        try {
+            let about = await About.findOne({}, req.body, { new: true })
 
-    updateAbout (req, res, next) {
-        About.findOneAndUpdate({}, req.body, { new: true })
-        .then(about => {
+            if(!about || about.length < 1){
+                console.log('masuk create')                
+                about = await About.create(req.body)
+            } else {
+                console.log('masuk update')
+                about = await About.findOneAndUpdate({}, req.body, { new: true })
+            }
+
             res.status(200).json({
                 message: 'Berhasil mengubah data about',
                 about
             })
-        })
-        .catch(next)
+        } catch (error) {
+            next(error)
+        }
     },
 
     getAbout (req, res, next) {        

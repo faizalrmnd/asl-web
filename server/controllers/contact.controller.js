@@ -51,7 +51,7 @@ module.exports = {
   },
 
     getAllContact(req, res, next) {
-        Contact.find({})
+        Contact.find({isResponded: false})
         .then(contacts => {
             res.status(200).json({
                 message: 'Berhasil mendapat semua contact',
