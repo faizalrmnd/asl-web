@@ -86,8 +86,8 @@ export default {
 
     updateService ({ commit }, payload) {
       return new Promise((resolve, reject) => {
-        let id = payload.id
-        delete payload.id
+        let id = payload.get('id')
+        payload.delete(id)
         axios.put(`http://localhost:3000/service/${id}`, payload, {
           headers: {
             token: localStorage.getItem('adminToken')

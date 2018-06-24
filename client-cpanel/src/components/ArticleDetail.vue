@@ -8,6 +8,11 @@
                         <input type="text" class="form-control" placeholder="Masukan Judul" v-model="title">
                     </div>
                     <div class="form-group">
+                        <img :src="image"/>
+                        <label>Featured Image</label>
+                        <input type="file" accept="image/*" class="form-control" placeholder="Masukan Featured image" @change="saveImage">
+                    </div>
+                    <div class="form-group">
                         <wysiwyg v-model="articleTemplate" />
                     </div>
 
@@ -29,17 +34,19 @@ export default {
     data () {
         return {
             title: this.$store.state.article.selectedArticle.title,
-            articleTemplate: this.$store.state.article.selectedArticle.template
+            articleTemplate: this.$store.state.article.selectedArticle.template,
+            image: this.$store.state.article.selectedArticle.image,
+            id: this.$store.state.article.selectedArticle._id
         }
     },
 
     methods: {
         updateArticle () {
-            let payload = {
-                title: this.title,
-                template: this.articleTemplate,
-                id: this.$route.params.id
-            }
+            let payload = new FormData()
+            payload.append('title', this.title)
+            payload.append('template', this.articleTemplate)
+            payload.append('image', this.image)
+            payload.append('id', this.id)
 
             this.$store.dispatch('article/updateArticle', payload)
             .then(message => {
@@ -48,7 +55,18 @@ export default {
             .catch(message => {
                 alert(message)
             })
-        }
+        },
+
+        saveImage(event) {
+            // Reference to the DOM input element
+            var input = event.target            
+            
+            // Ensure that you have a file before attempting to read it
+            if (input.files && input.files[0]) {
+                console.log(input.files[0])                
+                this.image = input.files[0]
+            }
+        },
     },
 
     computed: {

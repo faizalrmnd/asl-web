@@ -9,6 +9,7 @@ import Testimony from './views/Testimony.vue'
 import Service from './views/Service.vue'
 import Merchandise from './views/Merchandise.vue'
 import Events from './views/Event.vue'
+import EventDetail from './components/EventDetail.vue'
 import Enquiry from './views/Enquiry.vue'
 import About from './views/About.vue'
 
@@ -69,6 +70,12 @@ export default new Router({
       path: '/event',
       name: 'event',
       component: Events
+    },
+
+    {
+      path: '/event/:id',
+      name: 'event-detail',
+      component: EventDetail
     },
 
     {
