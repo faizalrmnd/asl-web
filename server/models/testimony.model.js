@@ -8,8 +8,7 @@ const testimonySchema = mongoose.Schema({
 
     testimony: {
         type: String,
-        required: [true, 'Harap masukan testimony'],
-        minlength: [32, 'Masukan testimoni setidaknya sepanjang 32 karakter']
+        required: [true, 'Harap masukan testimony']
     },
 
     from: {
