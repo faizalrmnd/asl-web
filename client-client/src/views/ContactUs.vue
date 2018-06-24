@@ -1,6 +1,8 @@
 <template>
   <div>
-    <h1>This is contact us page</h1>
+    <div class="route-header">
+      <h1 class="title animated fadeIn">Contact Us</h1>
+    </div>
   </div>
 </template>
 

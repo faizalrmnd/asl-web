@@ -1,6 +1,8 @@
 <template>
   <div>
-    <h1>Ini page Events</h1>
+    <div class="route-header">
+      <h1 class="title animated fadeIn">Events</h1>
+    </div>
   </div>
 </template>
 

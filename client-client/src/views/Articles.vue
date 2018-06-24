@@ -1,6 +1,8 @@
 <template>
   <div>
-    <h1>This is articles page</h1>
+    <div class="route-header">
+      <h1 class="title animated fadeIn">Articles</h1>
+    </div>
     <articleList/>
   </div>
 </template>
