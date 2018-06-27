@@ -1,9 +1,11 @@
 <template>
     <div>
-        <ul class="nav">
-            <li class="nav-item"><a class="nav-link" @click="selectedMenu = 0">Lihat Semua artikel</a></li>
-            <li class="nav-item"><a class="nav-link" @click="selectedMenu = 1">Buat artikel</a></li>                
-        </ul>     
+        <h1>Artikel</h1>
+        <a class="btn btn-primary" @click="selectedMenu = 1">
+            <img class="icon" src="../assets/img/add-icon.svg" alt="">
+            Buat Artikel Baru
+        </a>
+        <hr>  
         <table class="table" v-if="selectedMenu === 0">
             <thead>
                 <tr>
@@ -15,13 +17,13 @@
 
             <tbody>
                 <tr v-for="(article, index) in articles" :key="index">
-                    <th scope="row">{{ index }}</th>
+                    <th scope="row">{{ index + 1 }}</th>
                     <td>{{ article.title }}</td>
                     <td>
                         <div class="row">
-                            <div class="col-4"><router-link :to="{ name:'artikel-detail', params:{ id: article._id } }">Lihat</router-link></div>
-                            <div class="col-4"><router-link :to="{ name:'artikel-detail', params:{ id: article._id, change: true } }">Ubah</router-link></div>
-                            <div class="col-4"><a @click="deleteArticle(article)">Hapus</a></div>
+                            <router-link class="btn btn-primary ml-1" :to="{ name:'artikel-detail', params:{ id: article._id } }">Lihat</router-link>
+                            <router-link class="btn btn-warning ml-1" :to="{ name:'artikel-detail', params:{ id: article._id, change: true } }">Ubah</router-link>
+                            <a class="btn btn-danger ml-1" @click="deleteArticle(article)">Hapus</a>
                         </div>
                     </td>
                 </tr>
@@ -33,7 +35,7 @@
                     <label>Judul Artikel</label>
                     <input type="text" class="form-control" placeholder="Masukan Judul" v-model="title">
                 </div>
-                <div class="form-group">
+                <div class="form-group featured-image">
                     <label>Featured Image</label>
                     <input type="file" accept="image/*" class="form-control" placeholder="Masukan Featured image" @change="saveImage">
                 </div>
@@ -42,14 +44,45 @@
                     <wysiwyg v-model="articleTemplate" />
                 </div>
 
-                <button class="btn btn-primary" @click.prevent="createArticle">Submit</button>
+                <button class="btn btn-primary ml-1" @click.prevent="createArticle">
+                    <img class="icon" src="../assets/img/submit-icon.svg" alt="">
+                    Submit
+                </button>
+                <button class="btn btn-danger ml-1" @click.prevent="goBack">
+                    <img class="icon" src="../assets/img/back-icon.svg" alt="">
+                    Batal
+                </button>
             </form>            
         </div>
+        <div v-if="isLoading" class="loading-state">
+            <img src="../assets/img/loading-icon.svg" alt="">
+        </div>
+        <transition 
+        enter-active-class="animated fadeIn"
+        leave-active-class="animated fadeOut">
+            <div class="loading-state success" v-if="success">
+                <div class="card">
+                    <img src="../assets/img/success-icon.svg" alt=""> 
+                    <p>{{message}}</p>
+                </div>
+            </div>
+        </transition>
+        <transition 
+        enter-active-class="animated fadeIn"
+        leave-active-class="animated fadeOut">
+            <div class="loading-state error" v-if="error">
+                <div class="card">
+                    <img src="../assets/img/delete-icon.svg" alt=""> 
+                    <p>{{message}}</p>
+                </div>
+            </div>
+        </transition>
     </div>
 </template>
 
 <script>
 import '../../node_modules/vue-wysiwyg/dist/vueWysiwyg.css'
+import { mapGetters } from 'vuex'
 
 export default {
     data () {
@@ -57,7 +90,10 @@ export default {
             selectedMenu: 0,
             articleTemplate: '',
             title: '',
-            image: ''
+            image: '',
+            message: '',
+            success: false,
+            error: false
         }
     },
 
@@ -74,10 +110,22 @@ export default {
 
             this.$store.dispatch('article/createArticle', payload)
             .then(message => {
-                alert(message)
+                this.success = true
+                this.message = message
+                setTimeout(() => {
+                    this.success = false
+                    this.message = ''
+                    this.selectedMenu = 0
+                }, 1500)
             })
             .catch(message => {
-                alert(message)
+                this.error = true
+                this.message = message
+                setTimeout(() => {
+                    this.error = false
+                    this.message = ''
+                    this.selectedMenu = 0
+                }, 1500)
             })
         },
 
@@ -95,11 +143,25 @@ export default {
         deleteArticle (article) {
             this.$store.dispatch('article/deleteArticle', article)
             .then(message => {
-                alert(message)
+                this.success = true
+                this.message = message
+                setTimeout(() => {
+                    this.success = false
+                    this.message = ''
+                }, 1500)
             })
             .catch(message => {
-                alert(message)
+                this.error = true
+                this.message = message
+                setTimeout(() => {
+                    this.error = false
+                    this.message = ''
+                }, 1500)
             })
+        },
+
+        goBack () {
+            this.selectedMenu = 0
         }
     },
 
@@ -113,7 +175,10 @@ export default {
     computed: {
         articles () {
             return this.$store.state.article.articles
-        }
+        },
+        ...mapGetters({
+            isLoading: 'article/isLoading'
+        })
     }
 }
 </script>

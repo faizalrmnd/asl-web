@@ -7,7 +7,7 @@
                         <label>Judul Artikel</label>
                         <input type="text" class="form-control" placeholder="Masukan Judul" v-model="title">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group featured-image">
                         <img :src="image"/>
                         <label>Featured Image</label>
                         <input type="file" accept="image/*" class="form-control" placeholder="Masukan Featured image" @change="saveImage">
@@ -16,19 +16,53 @@
                         <wysiwyg v-model="articleTemplate" />
                     </div>
 
-                    <button class="btn btn-primary" @click.prevent="updateArticle">Submit</button>
+                    <button class="btn btn-primary ml-1" @click.prevent="updateArticle">
+                        <img class="icon" src="../assets/img/submit-icon.svg" alt="">
+                        Update
+                    </button>
+                    <button class="btn btn-danger ml-1" @click.prevent="goBack">
+                        <img class="icon" src="../assets/img/back-icon.svg" alt="">
+                        Batal
+                    </button>
                 </fieldset>
             </form>
         </div>
         <div v-else>
             <span v-html="selectedArticle.template"></span>
+            <button class="btn btn-primary ml-1" @click.prevent="goBack">
+                <img class="icon" src="../assets/img/back-icon.svg" alt="">
+                Kembali
+            </button>
         </div>
-        
+        <div v-if="isLoading" class="loading-state">
+            <img src="../assets/img/loading-icon.svg" alt="">
+        </div>
+        <transition 
+        enter-active-class="animated fadeIn"
+        leave-active-class="animated fadeOut">
+            <div class="loading-state success" v-if="success">
+                <div class="card">
+                    <img src="../assets/img/success-icon.svg" alt=""> 
+                    <p>{{message}}</p>
+                </div>
+            </div>
+        </transition>
+        <transition 
+        enter-active-class="animated fadeIn"
+        leave-active-class="animated fadeOut">
+            <div class="loading-state error" v-if="error">
+                <div class="card">
+                    <img src="../assets/img/delete-icon.svg" alt=""> 
+                    <p>Gagal merubah article</p>
+                </div>
+            </div>
+        </transition>
     </div>
 </template>
 
 <script>
 import '../../node_modules/vue-wysiwyg/dist/vueWysiwyg.css'
+import { mapGetters } from 'vuex'
 
 export default {
     data () {
@@ -36,7 +70,10 @@ export default {
             title: this.$store.state.article.selectedArticle.title,
             articleTemplate: this.$store.state.article.selectedArticle.template,
             image: this.$store.state.article.selectedArticle.image,
-            id: this.$store.state.article.selectedArticle._id
+            id: this.$store.state.article.selectedArticle._id,
+            message: '',
+            success: false,
+            error: false
         }
     },
 
@@ -50,10 +87,22 @@ export default {
 
             this.$store.dispatch('article/updateArticle', payload)
             .then(message => {
-                alert(message)
+                this.success = true
+                this.message = message
+                setTimeout(() => {
+                    this.success = false
+                    this.message = ''
+                    this.$router.push('/artikel')
+                }, 1500)
             })
             .catch(message => {
-                alert(message)
+                this.error = true
+                this.message = message
+                setTimeout(() => {
+                    this.error = false
+                    this.message = ''
+                    this.$router.push('/artikel')
+                }, 1500)
             })
         },
 
@@ -67,12 +116,19 @@ export default {
                 this.image = input.files[0]
             }
         },
+
+        goBack () {
+            this.$router.go(-1)
+        }
     },
 
     computed: {
         selectedArticle () {
             return this.$store.state.article.selectedArticle
-        }
+        },
+        ...mapGetters({
+            isLoading: 'article/isLoading'
+        })
     },
     
     created () {

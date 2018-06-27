@@ -6,7 +6,12 @@ export default {
   state: {
     applicants: [],
     selectedApplicant: {},
-    applicantsOnEvent: []
+    applicantsOnEvent: [],
+    isLoading: false
+  },
+
+  getters: {
+    isLoading: state => state.isLoading
   },
 
   mutations: {
@@ -34,11 +39,16 @@ export default {
     deleteApplicant (state, applicant) {
       let index = state.applicants.indexOf(applicant)
       state.applicants.splice(index, 1)
+    },
+
+    setLoading (state, payload) {
+      state.isLoading = payload
     }
   },
 
   actions: {
     getAllApplicant ({ commit }) {
+      commit('setLoading', true)
       return new Promise((resolve, reject) => {
         axios.get('http://localhost:3000/applicant', {
           headers: {
@@ -47,6 +57,7 @@ export default {
         })
           .then(res => {
             commit('setAllApplicant', res.data.applicants)
+            commit('setLoading', false)
             resolve(res.data.message)
           })
           .catch(err => {
@@ -56,6 +67,7 @@ export default {
     },
 
     getApplicant ({ commit }, id) {
+      commit('setLoading', true)
       return new Promise((resolve, reject) => {
         axios.get(`http://localhost:3000/applicant/${id}`, {
           headers: {
@@ -64,6 +76,7 @@ export default {
         })
           .then(res => {
             commit('setSelectedApplicant', res.data.applicant)
+            commit('setLoading', false)
             resolve(res.data.message)
           })
           .catch(err => {
@@ -73,6 +86,7 @@ export default {
     },
 
     getApplicantsByEventId ({ commit }, id) {
+      commit('setLoading', true)
       return new Promise((resolve, reject) => {
         axios.get(`http://localhost:3000/applicant/event/${id}`, {
           headers: {
@@ -81,6 +95,7 @@ export default {
         })
           .then(res => {
             commit('setApplicantsOnEvent', res.data.applicants)
+            commit('setLoading', false)
             resolve(res.data.message)
           })
           .catch(err => {
@@ -90,6 +105,7 @@ export default {
     },
 
     createApplicant ({ commit }, payload) {
+      commit('setLoading', true)
       return new Promise((resolve, reject) => {
         axios.post('http://localhost:3000/applicant', payload, {
           headers: {
@@ -98,6 +114,7 @@ export default {
         })
           .then(res => {
             commit('insertNewApplicant', res.data.applicant)
+            commit('setLoading', false)
             resolve(res.data.message)
           })
           .catch(err => {
@@ -107,6 +124,7 @@ export default {
     },
 
     deleteApplicant ({ commit }, payload) {
+      commit('setLoading', true)
       return new Promise((resolve, reject) => {
         let id = payload._id
         delete payload._id
@@ -117,6 +135,7 @@ export default {
         })
           .then(res => {
             commit('deleteApplicant', payload)
+            commit('setLoading', false)
             resolve(res.data.message)
           })
           .catch(err => {

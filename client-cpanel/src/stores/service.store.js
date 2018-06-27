@@ -5,7 +5,12 @@ export default {
 
   state: {
     services: [],
-    selectedService: {}
+    selectedService: {},
+    isLoading: false
+  },
+
+  getters: {
+    isLoading: state => state.isLoading
   },
 
   mutations: {
@@ -29,11 +34,16 @@ export default {
     deleteService (state, service) {
       let index = state.services.indexOf(service)
       state.services.splice(index, 1)
+    },
+
+    setLoading (state, payload) {
+      state.isLoading = payload
     }
   },
 
   actions: {
     getAllService ({ commit }) {
+      commit('setLoading', true)
       return new Promise((resolve, reject) => {
         axios.get('http://localhost:3000/service', {
           headers: {
@@ -42,6 +52,7 @@ export default {
         })
           .then(res => {
             commit('setAllService', res.data.services)
+            commit('setLoading', false)
             resolve(res.data.message)
           })
           .catch(err => {
@@ -51,6 +62,7 @@ export default {
     },
 
     getService ({ commit }, id) {
+      commit('setLoading', true)
       return new Promise((resolve, reject) => {
         axios.get(`http://localhost:3000/service/${id}`, {
           headers: {
@@ -59,6 +71,7 @@ export default {
         })
           .then(res => {
             commit('setSelectedService', res.data.service)
+            commit('setLoading', false)
             resolve(res.data.message)
           })
           .catch(err => {
@@ -68,6 +81,7 @@ export default {
     },
 
     createService ({ commit }, payload) {
+      commit('setLoading', true)
       return new Promise((resolve, reject) => {
         axios.post('http://localhost:3000/service', payload, {
           headers: {
@@ -76,6 +90,7 @@ export default {
         })
           .then(res => {
             commit('insertNewService', res.data.service)
+            commit('setLoading', false)
             resolve(res.data.message)
           })
           .catch(err => {
@@ -85,6 +100,7 @@ export default {
     },
 
     updateService ({ commit }, payload) {
+      commit('setLoading', true)
       return new Promise((resolve, reject) => {
         let id = payload.get('id')
         payload.delete(id)
@@ -95,6 +111,7 @@ export default {
         })
           .then(res => {
             commit('updateService', res.data.service)
+            commit('setLoading', false)
             resolve(res.data.message)
           })
           .catch(err => {
@@ -104,6 +121,7 @@ export default {
     },
 
     deleteService ({ commit }, payload) {
+      commit('setLoading', true)
       return new Promise((resolve, reject) => {
         let id = payload._id
         delete payload._id
@@ -114,6 +132,7 @@ export default {
         })
           .then(res => {
             commit('deleteService', payload)
+            commit('setLoading', false)
             resolve(res.data.message)
           })
           .catch(err => {

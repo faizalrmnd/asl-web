@@ -5,7 +5,12 @@ export default {
 
   state: {
     events: [],
-    selectedEvene: {}
+    selectedEvene: {},
+    isLoading: false
+  },
+
+  getters: {
+    isLoading: state => state.isLoading
   },
 
   mutations: {
@@ -29,11 +34,16 @@ export default {
     deleteEvent (state, event) {
       let index = state.events.indexOf(event)
       state.events.splice(index, 1)
+    },
+
+    setLoading (state, payload) {
+      state.isLoading = payload
     }
   },
 
   actions: {
     getAllEvent ({ commit }) {
+      commit('setLoading', true)
       return new Promise((resolve, reject) => {
         axios.get('http://localhost:3000/event', {
           headers: {
@@ -42,6 +52,7 @@ export default {
         })
           .then(res => {
             commit('setAllEvent', res.data.events)
+            commit('setLoading', false)
             resolve(res.data.message)
           })
           .catch(err => {
@@ -51,6 +62,7 @@ export default {
     },
 
     getEvent ({ commit }, id) {
+      commit('setLoading', true)
       return new Promise((resolve, reject) => {
         axios.get(`http://localhost:3000/event/${id}`, {
           headers: {
@@ -59,6 +71,7 @@ export default {
         })
           .then(res => {
             commit('setSelectedEvent', res.data.event)
+            commit('setLoading', false)
             resolve(res.data.message)
           })
           .catch(err => {
@@ -68,6 +81,7 @@ export default {
     },
 
     createEvent ({ commit }, payload) {
+      commit('setLoading', true)
       return new Promise((resolve, reject) => {
         axios.post('http://localhost:3000/event', payload, {
           headers: {
@@ -76,6 +90,7 @@ export default {
         })
           .then(res => {
             commit('insertNewEvent', res.data.event)
+            commit('setLoading', false)
             resolve(res.data.message)
           })
           .catch(err => {
@@ -85,6 +100,7 @@ export default {
     },
 
     updateEvent ({ commit }, payload) {
+      commit('setLoading', true)
       return new Promise((resolve, reject) => {
         let id = payload.get('id')
         payload.delete('id')
@@ -95,6 +111,7 @@ export default {
         })
           .then(res => {
             commit('updateEvent', res.data.event)
+            commit('setLoading', false)
             resolve(res.data.message)
           })
           .catch(err => {
@@ -104,6 +121,7 @@ export default {
     },
 
     deleteEvent ({ commit }, payload) {
+      commit('setLoading', true)
       return new Promise((resolve, reject) => {
         let id = payload._id
         delete payload._id
@@ -114,6 +132,7 @@ export default {
         })
           .then(res => {
             commit('deleteEvent', payload)
+            commit('setLoading', false)
             resolve(res.data.message)
           })
           .catch(err => {
