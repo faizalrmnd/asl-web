@@ -5,7 +5,12 @@ export default {
 
   state: {
     testimonies: [],
-    selectedTestimony: {}
+    selectedTestimony: {},
+    isLoading: false
+  },
+
+  getters: {
+    isLoading: state => state.isLoading
   },
 
   mutations: {
@@ -29,11 +34,16 @@ export default {
     deleteTestimony (state, testimony) {
       let index = state.testimonies.indexOf(testimony)
       state.testimonies.splice(index, 1)
+    },
+
+    setLoading (state, payload) {
+      state.isLoading = payload
     }
   },
 
   actions: {
     getAllTestimonies ({ commit }) {
+      commit('setLoading', true)
       return new Promise((resolve, reject) => {
         axios.get('http://localhost:3000/testimony', {
           headers: {
@@ -42,6 +52,7 @@ export default {
         })
           .then(res => {
             commit('setAllTestimonies', res.data.testimonies)
+            commit('setLoading', false)
             resolve(res.data.message)
           })
           .catch(err => {
@@ -51,6 +62,7 @@ export default {
     },
 
     getTestimony ({ commit }, id) {
+      commit('setLoading', true)
       return new Promise((resolve, reject) => {
         axios.get(`http://localhost:3000/testimony/${id}`, {
           headers: {
@@ -59,6 +71,7 @@ export default {
         })
           .then(res => {
             commit('setAllTestimonies', res.data.testimonies)
+            commit('setLoading', false)
             resolve(res.data.message)
           })
           .catch(err => {
@@ -68,6 +81,7 @@ export default {
     },
 
     createTestimony ({ commit }, payload) {
+      commit('setLoading', true)
       return new Promise((resolve, reject) => {
         axios.post('http://localhost:3000/testimony', payload, {
           headers: {
@@ -76,6 +90,7 @@ export default {
         })
           .then(res => {
             commit('insertNewTestimony', res.data.testimony)
+            commit('setLoading', false)
             resolve(res.data.message)
           })
           .catch(err => {
@@ -85,6 +100,7 @@ export default {
     },
 
     updateTestimony ({ commit }, payload) {
+      commit('setLoading', true)
       return new Promise((resolve, reject) => {
         let id = payload.get('id')
         payload.delete('id')
@@ -95,6 +111,7 @@ export default {
         })
           .then(res => {
             commit('updateTestimony', res.data.testimony)
+            commit('setLoading', false)
             resolve(res.data.message)
           })
           .catch(err => {
@@ -104,6 +121,7 @@ export default {
     },
 
     deleteTestimony ({ commit }, payload) {
+      commit('setLoading', true)
       return new Promise((resolve, reject) => {
         let id = payload._id
         delete payload._id
@@ -114,6 +132,7 @@ export default {
         })
           .then(res => {
             commit('deleteTestimony', payload)
+            commit('setLoading', false)
             resolve(res.data.message)
           })
           .catch(err => {

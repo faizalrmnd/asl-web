@@ -1,9 +1,11 @@
 <template>
     <div>
-         <ul class="nav">
-            <li class="nav-item"><a class="nav-link" @click="selectedMenu = 0">Lihat Semua testimoni</a></li>
-            <li class="nav-item"><a class="nav-link" @click="selectedMenu = 1">Buat testimoni</a></li>                
-        </ul>
+        <h1>Testimoni</h1>
+        <a class="btn btn-primary" @click="selectedMenu = 1">
+            <img class="icon" src="../assets/img/add-icon.svg" alt="">
+            Buat Testimoni Baru
+        </a>
+        <hr>
         <table class="table" v-if="selectedMenu === 0">
             <thead>
                 <tr>
@@ -16,13 +18,13 @@
 
             <tbody>
                 <tr v-for="(testimony, index) in testimonies" :key="index">
-                    <th scope="row">{{ index }}</th>
+                    <th scope="row">{{ index + 1 }}</th>
                     <td>{{ testimony.testimoner }}</td>
                     <td>{{ testimony.from }}</td>
                     <td>
                         <div class="row">
-                            <div class="col-4"><a data-toggle="modal" :data-target="'#modal'+index" @click="setSelected(testimony)">Lihat</a></div>
-                            <div class="col-4"><a @click="deleteTestimony(testimony)">Hapus</a></div>
+                            <a class="btn btn-primary ml-1" data-toggle="modal" :data-target="'#modal'+index" @click="setSelected(testimony)">Lihat</a>
+                            <a class="btn btn-danger ml-1" @click="deleteTestimony(testimony)">Hapus</a>
                         </div>
 
                         <div class="modal fade" :id="'modal'+index" tabindex="-1" role="dialog">
@@ -41,7 +43,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Testimoni</label>
-                                        <textarea cols="30" rows="10" v-model="selectedTestimony.testimony"></textarea>
+                                        <textarea class="form-control" cols="30" rows="10" v-model="selectedTestimony.testimony"></textarea>
                                     </div>
                                     <div class="form-group">
                                         <label>Asal</label>
@@ -54,8 +56,14 @@
                                     </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary" data-dismiss="modal" @click="updateTestimony">Simpan</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">
+                                    <img class="icon" src="../assets/img/back-icon.svg" alt="">
+                                    Batal
+                                </button>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal" @click="updateTestimony">
+                                    <img class="icon" src="../assets/img/submit-icon.svg" alt="">
+                                    Simpan
+                                </button>
                             </div>
                             </div>
                         </div>
@@ -64,7 +72,7 @@
                 </tr>
             </tbody>
         </table>
-        <div v-else-if="selectedMenu === 1">
+        <div v-else-if="selectedMenu === 1" class="col-md-6 offset-md-3">
             <div class="form-group">
                 <label>Nama</label>
                 <input type="text" class="form-control" v-model="testimoner"/>
@@ -81,12 +89,43 @@
                 <label>Gambar</label>
                 <input type="file" accept="image/*" class="form-control" placeholder="Masukan Gambar" @change="saveImage"/>
             </div>
-            <button class="btn btn-primary" @click="createTestimony">Simpan</button>
+            <button class="btn btn-primary ml-1" @click="createTestimony">
+                <img class="icon" src="../assets/img/submit-icon.svg" alt="">
+                Simpan
+            </button>
+            <button class="btn btn-danger ml-1" @click="selectedMenu = 0">
+                <img class="icon" src="../assets/img/back-icon.svg" alt="">
+                Batal
+            </button>
         </div>
+        <div v-if="isLoading" class="loading-state">
+            <img src="../assets/img/loading-icon.svg" alt="">
+        </div>
+        <transition 
+        enter-active-class="animated fadeIn"
+        leave-active-class="animated fadeOut">
+            <div class="loading-state success" v-if="success">
+                <div class="card">
+                    <img src="../assets/img/success-icon.svg" alt=""> 
+                    <p>{{message}}</p>
+                </div>
+            </div>
+        </transition>
+        <transition 
+        enter-active-class="animated fadeIn"
+        leave-active-class="animated fadeOut">
+            <div class="loading-state error" v-if="error">
+                <div class="card">
+                    <img src="../assets/img/delete-icon.svg" alt=""> 
+                    <p>{{message}}</p>
+                </div>
+            </div>
+        </transition>
     </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
     data () {
         return {
@@ -95,8 +134,10 @@ export default {
             image: '',
             testimoner: '',
             testimony: '',
-            from: ''
-
+            from: '',
+            message: '',
+            success: false,
+            error: false
         }
     },
 
@@ -140,11 +181,23 @@ export default {
             this.image = ''
 
             this.$store.dispatch('testimony/createTestimony', payload)
-            .then(msg => {
-                alert(msg)
+            .then(message => {
+                this.success = true
+                this.message = message
+                setTimeout(() => {
+                    this.success = false
+                    this.message = ''
+                    this.selectedMenu = 0
+                }, 1500)
             })
-            .catch(msg => {
-                alert(msg)
+            .catch(message => {
+                this.error = true
+                this.message = message
+                setTimeout(() => {
+                    this.error = false
+                    this.message = ''
+                    this.selectedMenu = 0
+                }, 1500)
             })
         },
 
@@ -157,21 +210,41 @@ export default {
             payload.append('id', this.selectedTestimony._id)
 
             this.$store.dispatch('testimony/updateTestimony', payload)
-            .then(msg => {
-                alert(msg)
+            .then(message => {
+                this.success = true
+                this.message = message
+                setTimeout(() => {
+                    this.success = false
+                    this.message = ''
+                }, 1500)
             })
-            .catch(msg => {
-                alert(msg)
+            .catch(message => {
+                this.error = true
+                this.message = message
+                setTimeout(() => {
+                    this.error = false
+                    this.message = ''
+                }, 1500)
             })
         },
 
         deleteTestimony (testimony) {
             this.$store.dispatch('testimony/deleteTestimony', testimony)
-            .then(msg => {
-                alert(msg)
+            .then(message => {
+                this.success = true
+                this.message = message
+                setTimeout(() => {
+                    this.success = false
+                    this.message = ''
+                }, 1500)
             })
             .catch(msg => {
-                alert(msg)
+                this.error = true
+                this.message = message
+                setTimeout(() => {
+                    this.error = false
+                    this.message = ''
+                }, 1500)
             })
         }
     },
@@ -186,7 +259,10 @@ export default {
     computed: {
         testimonies () {
             return this.$store.state.testimony.testimonies
-        }
+        },
+        ...mapGetters({
+            isLoading: 'testimony/isLoading'
+        })
     }
 }
 </script>

@@ -1,9 +1,11 @@
 <template>
     <div>
-         <ul class="nav">
-            <li class="nav-item"><a class="nav-link" @click="selectedMenu = 0">Lihat Semua Merchandise</a></li>
-            <li class="nav-item"><a class="nav-link" @click="selectedMenu = 1">Buat Merchandise</a></li>                
-        </ul>
+        <h1>Merchandise</h1>
+        <a class="btn btn-primary" @click="selectedMenu = 1">
+            <img class="icon" src="../assets/img/add-icon.svg" alt="">
+            Buat Merchandise Baru
+        </a>
+        <hr>
         <table class="table" v-if="selectedMenu === 0">
             <thead>
                 <tr>
@@ -17,14 +19,14 @@
 
             <tbody>
                 <tr v-for="(merchandise, index) in merchandises" :key="index">
-                    <th scope="row">{{ index }}</th>
+                    <th scope="row">{{ index + 1 }}</th>
                     <td>{{ merchandise.name }}</td>
                     <td>{{ merchandise.description }}</td>
-                    <td>{{ price.name }}</td>
+                    <td>{{ merchandise.price | currency }}</td>
                     <td>
                         <div class="row">
-                            <div class="col-4"><a data-toggle="modal" :data-target="'#modal'+index" @click="setSelected(merchandise)">Lihat</a></div>
-                            <div class="col-4"><a @click="deleteMerchandise(merchandise)">Hapus</a></div>
+                            <a class="btn btn-primary ml-1" data-toggle="modal" :data-target="'#modal'+index" @click="setSelected(merchandise)">Lihat</a>
+                            <a class="btn btn-danger ml-1" @click="deleteMerchandise(merchandise)">Hapus</a>
                         </div>
 
                         <div class="modal fade" :id="'modal'+index" tabindex="-1" role="dialog">
@@ -43,7 +45,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Deskripsi</label>
-                                        <textarea cols="30" rows="10" v-model="selectedMerchandise.description"></textarea>
+                                        <textarea class="form-control" cols="30" rows="10" v-model="selectedMerchandise.description"></textarea>
                                     </div>
                                     <div class="form-group">
                                         <label>Price</label>
@@ -56,8 +58,14 @@
                                     </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary" data-dismiss="modal" @click="updateMerchandise">Simpan</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">
+                                    <img class="icon" src="../assets/img/back-icon.svg" alt="">
+                                    Batal
+                                </button>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal" @click="updateMerchandise">
+                                    <img class="icon" src="../assets/img/submit-icon.svg" alt="">
+                                    Simpan
+                                </button>
                             </div>
                             </div>
                         </div>
@@ -66,7 +74,7 @@
                 </tr>
             </tbody>
         </table>
-        <div v-else-if="selectedMenu === 1">
+        <div v-else-if="selectedMenu === 1" class="col-md-6 offset-md-3">
             <div class="form-group">
                 <label>Nama</label>
                 <input type="text" class="form-control" v-model="name"/>
@@ -83,12 +91,44 @@
                 <label>Gambar</label>
                 <input type="file" accept="image/*" class="form-control" placeholder="Masukan Gambar" @change="saveImage"/>
             </div>
-            <button class="btn btn-primary" @click="createMerchandise">Simpan</button>
+            <button class="btn btn-primary ml-1" @click="createMerchandise">
+                <img class="icon" src="../assets/img/submit-icon.svg" alt="">
+                Simpan
+            </button>
+            <button class="btn btn-danger ml-1" @click="selectedMenu = 0">
+                <img class="icon" src="../assets/img/back-icon.svg" alt="">
+                Batal
+            </button>
         </div>
+        <div v-if="isLoading" class="loading-state">
+            <img src="../assets/img/loading-icon.svg" alt="">
+        </div>
+        <transition 
+        enter-active-class="animated fadeIn"
+        leave-active-class="animated fadeOut">
+            <div class="loading-state success" v-if="success">
+                <div class="card">
+                    <img src="../assets/img/success-icon.svg" alt=""> 
+                    <p>{{message}}</p>
+                </div>
+            </div>
+        </transition>
+        <transition 
+        enter-active-class="animated fadeIn"
+        leave-active-class="animated fadeOut">
+            <div class="loading-state error" v-if="error">
+                <div class="card">
+                    <img src="../assets/img/delete-icon.svg" alt=""> 
+                    <p>{{message}}</p>
+                </div>
+            </div>
+        </transition>
     </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
     data () {
         return {
@@ -97,8 +137,10 @@ export default {
             image: '',
             name: '',
             description: '',
-            price: 0
-
+            price: 0,
+            message: '',
+            success: false,
+            error: false
         }
     },
 
@@ -142,11 +184,23 @@ export default {
             this.price = 0
 
             this.$store.dispatch('merchandise/createMerchandise', payload)
-            .then(msg => {
-                alert(msg)
+            .then(message => {
+                this.success = true
+                this.message = message
+                setTimeout(() => {
+                    this.success = false
+                    this.message = ''
+                    this.selectedMenu = 0
+                }, 1500)
             })
-            .catch(msg => {
-                alert(msg)
+            .catch(message => {
+                this.error = true
+                this.message = message
+                setTimeout(() => {
+                    this.error = false
+                    this.message = ''
+                    this.selectedMenu = 0
+                }, 1500)
             })
         },
 
@@ -159,21 +213,41 @@ export default {
             payload.append('id', this.selectedMerchandise._id)
 
             this.$store.dispatch('merchandise/updateMerchandise', payload)
-            .then(msg => {
-                alert(msg)
+            .then(message => {
+                this.success = true
+                this.message = message
+                setTimeout(() => {
+                    this.success = false
+                    this.message = ''
+                }, 1500)
             })
-            .catch(msg => {
-                alert(msg)
+            .catch(message => {
+                this.error = true
+                this.message = message
+                setTimeout(() => {
+                    this.error = false
+                    this.message = ''
+                }, 1500)
             })
         },
 
         deleteMerchandise (merchandise) {
-            this.$store.dispatch('merchandise/createMerchandise', merchandise)
-            .then(msg => {
-                alert(msg)
+            this.$store.dispatch('merchandise/deleteMerchandise', merchandise)
+            .then(message => {
+                this.success = true
+                this.message = message
+                setTimeout(() => {
+                    this.success = false
+                    this.message = ''
+                }, 1500)
             })
-            .catch(msg => {
-                alert(msg)
+            .catch(message => {
+                this.error = true
+                this.message = message
+                setTimeout(() => {
+                    this.error = false
+                    this.message = ''
+                }, 1500)
             })
         }
     },
@@ -188,7 +262,10 @@ export default {
     computed: {
         merchandises () {
             return this.$store.state.merchandise.merchandises
-        }
+        },
+        ...mapGetters({
+            isLoading: 'merchandise/isLoading'
+        })
     }
 }
 </script>

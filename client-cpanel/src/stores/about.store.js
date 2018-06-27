@@ -4,17 +4,26 @@ export default {
   namespaced: true,
 
   state: {
-    about: {}
+    about: {},
+    isLoading: false
+  },
+
+  getters: {
+    isLoading: state => state.isLoading
   },
 
   mutations: {
     setAbout (state, about) {
       state.about = about
+    },
+    setLoading (state, payload) {
+      state.isLoading = payload
     }
   },
 
   actions: {
     getAbout ({ commit }) {
+      commit('setLoading', true)
       return new Promise((resolve, reject) => {
         axios.get('http://localhost:3000/about', {
           headers: {
@@ -23,6 +32,7 @@ export default {
         })
           .then(res => {
             commit('setAbout', res.data.about)
+            commit('setLoading', false)
             resolve(res.data.message)
           })
           .catch(err => {
@@ -32,6 +42,7 @@ export default {
     },
 
     createUpdateAbout ({ commit }, payload) {
+      commit('setLoading', true)
       return new Promise((resolve, reject) => {
         axios.post(`http://localhost:3000/about`, payload, {
           headers: {
@@ -40,6 +51,7 @@ export default {
         })
           .then(res => {
             commit('setAbout', res.data.about)
+            commit('setLoading', false)
             resolve(res.data.message)
           })
           .catch(err => {

@@ -5,7 +5,12 @@ export default {
 
   state: {
     loggedIn: false,
-    user: {}
+    user: {},
+    isLoading: false
+  },
+
+  getters: {
+    isLoading: state => state.isLoading
   },
 
   mutations: {
@@ -15,11 +20,16 @@ export default {
 
     setUser (state, user) {
       state.user = Object.assign({}, user)
+    },
+
+    setLoading (state, payload) {
+      state.isLoading = payload
     }
   },
 
   actions: {
     verifyToken ({ commit }) {
+      commit('setLoading', true)
       return new Promise((resolve, reject) => {
         axios.get('http://localhost:3000/token', {
           headers: {
@@ -29,6 +39,7 @@ export default {
           .then(res => {
             commit('setUser', res.data.user)
             commit('changeLoggedInStatus', true)
+            commit('setLoading', false)
             resolve()
           })
           .catch(err => {
@@ -39,12 +50,14 @@ export default {
     },
 
     register ({ commit }, payload) {
+      commit('setLoading', true)
       return new Promise((resolve, reject) => {
         axios.post('http://localhost:3000/users/register', payload)
           .then((res) => {
             localStorage.setItem('adminToken', res.headers.token)
             commit('setUser', res.data.user)
             commit('changeLoggedInStatus', true)
+            commit('setLoading', false)
             resolve()
           })
           .catch((error) => {
@@ -54,12 +67,14 @@ export default {
     },
 
     login ({ commit }, payload) {
+      commit('setLoading', true)
       return new Promise((resolve, reject) => {
         axios.post('http://localhost:3000/users/login', payload)
           .then((res) => {
             localStorage.setItem('adminToken', res.headers.token)
             commit('setUser', res.data.user)
             commit('changeLoggedInStatus', true)
+            commit('setLoading', false)
             resolve()
           })
           .catch((error) => {
@@ -69,6 +84,7 @@ export default {
     },
 
     updateAccount ({ commit }, payload) {
+      commit('setLoading', true)
       return new Promise((resolve, reject) => {
         axios.put('http://localhost:3000/users', payload, {
           headers: {
@@ -77,6 +93,7 @@ export default {
         })
           .then((res) => {
             commit('setUser', res.data.user)
+            commit('setLoading', false)
             resolve(res.data.message)
           })
           .catch((error) => {
@@ -86,6 +103,7 @@ export default {
     },
 
     changePassword ({ commit }, payload) {
+      commit('setLoading', true)
       return new Promise((resolve, reject) => {
         axios.put('http://localhost:3000/users/pass', payload, {
           headers: {
@@ -93,6 +111,7 @@ export default {
           }
         })
           .then((res) => {
+            commit('setLoading', false)
             resolve(res.data)
           })
           .catch((error) => {
@@ -102,6 +121,7 @@ export default {
     },
 
     deleteAccount ({ commit }) {
+      commit('setLoading', true)
       return new Promise((resolve, reject) => {
         axios.delete(`http://localhost:3000/users/`, {
           headers: {
@@ -110,6 +130,7 @@ export default {
         })
           .then((res) => {
             commit('setUser', {})
+            commit('setLoading', false)
             resolve(res.data.message)
           })
           .catch((error) => {

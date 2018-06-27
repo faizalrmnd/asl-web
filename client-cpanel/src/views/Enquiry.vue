@@ -1,6 +1,8 @@
 <template>
     <div>
-         <table class="table">
+        <h1>Enquiry</h1>
+        <hr>
+        <table class="table">
             <thead>
                 <tr>
                     <th scope="col">#</th>

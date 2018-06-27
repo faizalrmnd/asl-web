@@ -5,7 +5,12 @@ export default {
 
   state: {
     merchandises: [],
-    selectedMerchandise: {}
+    selectedMerchandise: {},
+    isLoading: false
+  },
+
+  getters: {
+    isLoading: state => state.isLoading
   },
 
   mutations: {
@@ -29,11 +34,16 @@ export default {
     deleteMerchandise (state, merchandise) {
       let index = state.merchandises.indexOf(merchandise)
       state.merchandises.splice(index, 1)
+    },
+
+    setLoading (state, payload) {
+      state.isLoading = payload
     }
   },
 
   actions: {
     getAllMerchandise ({ commit }) {
+      commit('setLoading', true)
       return new Promise((resolve, reject) => {
         axios.get('http://localhost:3000/merchandise', {
           headers: {
@@ -42,6 +52,7 @@ export default {
         })
           .then(res => {
             commit('setAllMerchandise', res.data.merchandises)
+            commit('setLoading', false)
             resolve(res.data.message)
           })
           .catch(err => {
@@ -51,6 +62,7 @@ export default {
     },
 
     getMerchandise ({ commit }, id) {
+      commit('setLoading', true)
       return new Promise((resolve, reject) => {
         axios.get(`http://localhost:3000/merchandise/${id}`, {
           headers: {
@@ -59,6 +71,7 @@ export default {
         })
           .then(res => {
             commit('setSelectedMerchandise', res.data.merchandise)
+            commit('setLoading', false)
             resolve(res.data.message)
           })
           .catch(err => {
@@ -68,6 +81,7 @@ export default {
     },
 
     createMerchandise ({ commit }, payload) {
+      commit('setLoading', true)
       return new Promise((resolve, reject) => {
         axios.post('http://localhost:3000/merchandise', payload, {
           headers: {
@@ -76,6 +90,7 @@ export default {
         })
           .then(res => {
             commit('insertNewMerchandise', res.data.merchandise)
+            commit('setLoading', false)
             resolve(res.data.message)
           })
           .catch(err => {
@@ -85,6 +100,7 @@ export default {
     },
 
     updateMerchandise ({ commit }, payload) {
+      commit('setLoading', true)
       return new Promise((resolve, reject) => {
         let id = payload.get('id')
         payload.delete(id)
@@ -95,6 +111,7 @@ export default {
         })
           .then(res => {
             commit('updateMerchandise', res.data.merchandise)
+            commit('setLoading', false)
             resolve(res.data.message)
           })
           .catch(err => {
@@ -104,6 +121,7 @@ export default {
     },
 
     deleteMerchandise ({ commit }, payload) {
+      commit('setLoading', true)
       return new Promise((resolve, reject) => {
         let id = payload._id
         delete payload._id
@@ -114,6 +132,7 @@ export default {
         })
           .then(res => {
             commit('deleteMerchandise', payload)
+            commit('setLoading', false)
             resolve(res.data.message)
           })
           .catch(err => {

@@ -5,7 +5,12 @@ export default {
 
   state: {
     articles: [],
-    selectedArticle: {}
+    selectedArticle: {},
+    isLoading: false
+  },
+
+  getters: {
+    isLoading: state => state.isLoading
   },
 
   mutations: {
@@ -29,11 +34,16 @@ export default {
     deleteArticle (state, article) {
       let index = state.articles.indexOf(article)
       state.articles.splice(index, 1)
+    },
+
+    setLoading (state, payload) {
+      state.isLoading = payload
     }
   },
 
   actions: {
     getAllArticles ({ commit }) {
+      commit('setLoading', true)
       return new Promise((resolve, reject) => {
         axios.get('http://localhost:3000/article', {
           headers: {
@@ -42,6 +52,7 @@ export default {
         })
           .then(res => {
             commit('setAllArticle', res.data.articles)
+            commit('setLoading', false)
             resolve(res.data.message)
           })
           .catch(err => {
@@ -51,6 +62,7 @@ export default {
     },
 
     getArticle ({ commit }, id) {
+      commit('setLoading', true)
       return new Promise((resolve, reject) => {
         axios.get(`http://localhost:3000/article/${id}`, {
           headers: {
@@ -59,6 +71,7 @@ export default {
         })
           .then(res => {
             commit('setSelectedArticle', res.data.article)
+            commit('setLoading', false)
             resolve(res.data.message)
           })
           .catch(err => {
@@ -68,6 +81,7 @@ export default {
     },
 
     createArticle ({ commit }, payload) {
+      commit('setLoading', true)
       return new Promise((resolve, reject) => {
         axios.post('http://localhost:3000/article', payload, {
           headers: {
@@ -76,6 +90,7 @@ export default {
         })
           .then(res => {
             commit('insertNewArticle', res.data.article)
+            commit('setLoading', false)
             resolve(res.data.message)
           })
           .catch(err => {
@@ -85,6 +100,7 @@ export default {
     },
 
     updateArticle ({ commit }, payload) {
+      commit('setLoading', true)
       return new Promise((resolve, reject) => {
         let id = payload.get('id')
         payload.delete(id)
@@ -95,6 +111,7 @@ export default {
         })
           .then(res => {
             commit('updateArticle', res.data.article)
+            commit('setLoading', false)
             resolve(res.data.message)
           })
           .catch(err => {
@@ -104,6 +121,7 @@ export default {
     },
 
     deleteArticle ({ commit }, payload) {
+      commit('setLoading', true)
       return new Promise((resolve, reject) => {
         let id = payload._id
         delete payload._id
@@ -114,6 +132,7 @@ export default {
         })
           .then(res => {
             commit('deleteArticle', payload)
+            commit('setLoading', false)
             resolve(res.data.message)
           })
           .catch(err => {
