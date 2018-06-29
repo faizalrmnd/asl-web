@@ -10,7 +10,9 @@ export default {
   },
 
   getters: {
-    isLoading: state => state.isLoading
+    isLoading: state => state.isLoading,
+    getArticles: state => state.articles,
+    selectedArticle: state => state.selectedArticle
   },
 
   mutations: {
@@ -23,7 +25,7 @@ export default {
     },
 
     insertNewArticle (state, article) {
-      state.articles.push(article)
+      state.articles.unshift(article)
     },
 
     updateArticle (state, article) {
@@ -103,7 +105,8 @@ export default {
       commit('setLoading', true)
       return new Promise((resolve, reject) => {
         let id = payload.get('id')
-        payload.delete(id)
+        // payload.delete(id)
+        // let id = payload._id
         axios.put(`http://localhost:3000/article/${id}`, payload, {
           headers: {
             token: localStorage.getItem('adminToken')

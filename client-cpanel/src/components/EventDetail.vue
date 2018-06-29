@@ -9,7 +9,7 @@
                     <th>Nomor Telpon</th>
                 </td>
                 <td v-for="(applicant, index) in applicants" :key="index">
-                    <tr>{{ index }}</tr>
+                    <tr>{{ index + 1 }}</tr>
                     <tr>{{ applicant.name }}</tr>
                     <tr>{{ applicant.email }}</tr>
                     <tr>{{ applicant.phone }}</tr>

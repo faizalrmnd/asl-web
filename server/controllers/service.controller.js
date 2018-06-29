@@ -52,7 +52,7 @@ module.exports = {
     deleteServiceById (req, res, next) {
         let id = req.params.id
         
-        Service.findById(id)
+        Service.findByIdAndDelete(id)
         .then(() => {
             res.status(200).json({
                 message: 'Berhasil menghapus data service'

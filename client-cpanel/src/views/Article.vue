@@ -11,6 +11,7 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Title</th>
+                    <th scope="col">Created</th>
                     <th scope="col">Options</th>
                 </tr>
             </thead>
@@ -19,6 +20,7 @@
                 <tr v-for="(article, index) in articles" :key="index">
                     <th scope="row">{{ index + 1 }}</th>
                     <td>{{ article.title }}</td>
+                    <td>{{article.createdAt | moment("from")}}</td>
                     <td>
                         <div class="row">
                             <router-link class="btn btn-primary ml-1" :to="{ name:'artikel-detail', params:{ id: article._id } }">Lihat</router-link>
@@ -173,11 +175,12 @@ export default {
     },
 
     computed: {
-        articles () {
-            return this.$store.state.article.articles
-        },
+        // articles () {
+        //     return this.$store.state.article.articles
+        // },
         ...mapGetters({
-            isLoading: 'article/isLoading'
+            isLoading: 'article/isLoading',
+            articles: 'article/getArticles'
         })
     }
 }

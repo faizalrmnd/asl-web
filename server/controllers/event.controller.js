@@ -52,7 +52,7 @@ module.exports = {
     deleteEventsById (req, res, next) {
         let id = req.params.id
         
-        Events.findById(id)
+        Events.findByIdAndDelete(id)
         .then(() => {
             res.status(200).json({
                 message: 'Berhasil menghapus data event'

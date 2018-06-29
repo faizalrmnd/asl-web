@@ -27,6 +27,8 @@ export default {
     },
 
     updateTestimony (state, testimony) {
+      // di index of ga ada yang sama karena dia nyari data yang udah ke update
+      // possible fix, commit dulu abis itu baru axios update
       let index = state.testimonies.indexOf(testimony)
       state.testimonies.splice(index, 1, testimony)
     },

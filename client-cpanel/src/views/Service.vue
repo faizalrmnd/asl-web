@@ -20,15 +20,11 @@
                 <tr v-for="(service, index) in services" :key="index">
                     <th scope="row">{{ index + 1 }}</th>
                     <td>{{ service.name }}</td>
-                    <td>{{ service.description }}</td>
+                    <td>{{ service.description | truncate(80) }}</td>
                     <td>
                         <div class="row">
-                            <div class="col-12">
-                                <a class="btn btn-primary" data-toggle="modal" :data-target="'#modal'+index" @click="setSelected(service)">Lihat</a>
-                            </div>
-                            <div class="col-12">
-                                <a class="btn btn-danger" @click="deleteService(service)">Hapus</a>
-                            </div>
+                            <a class="btn btn-primary ml-1" data-toggle="modal" :data-target="'#modal'+index" @click="setSelected(service)">Lihat</a>
+                            <a class="btn btn-danger ml-1" @click="deleteService(service)">Hapus</a>
                         </div>
 
                         <div class="modal fade" :id="'modal'+index" tabindex="-1" role="dialog">
@@ -206,6 +202,8 @@ export default {
             .then(message => {
                 this.success = true
                 this.message = message
+                //quick fix
+                this.$store.dispatch('service/getAllService')
                 setTimeout(() => {
                     this.success = false
                     this.message = ''
