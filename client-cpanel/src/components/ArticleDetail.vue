@@ -28,7 +28,13 @@
             </form>
         </div>
         <div v-else>
+            <img :src="selectedArticle.image" alt="">
+            <br>
+            <h1>{{selectedArticle.title}}</h1>
+            <br>
             <span v-html="selectedArticle.template"></span>
+            <br>
+            <br>
             <button class="btn btn-primary ml-1" @click.prevent="goBack">
                 <img class="icon" src="../assets/img/back-icon.svg" alt="">
                 Kembali

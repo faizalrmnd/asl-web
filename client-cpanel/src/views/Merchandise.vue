@@ -216,6 +216,8 @@ export default {
             .then(message => {
                 this.success = true
                 this.message = message
+                //quick fix
+                this.$store.dispatch('merchandise/getAllMerchandise')
                 setTimeout(() => {
                     this.success = false
                     this.message = ''

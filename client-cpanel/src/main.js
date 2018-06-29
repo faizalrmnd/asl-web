@@ -8,10 +8,12 @@ import VueCurrencyFilter from 'vue-currency-filter'
 import VueMoment from 'vue-moment'
 import './assets/css/admin-panel.css'
 import VueMq from 'vue-mq'
+import VueTruncate from 'vue-truncate-filter'
 // import Vuetify from 'vuetify'
 // import '../node_modules/vuetify/dist/vuetify.min.css'
 
 Vue.config.productionTip = false
+Vue.use(VueTruncate)
 Vue.use(VeeValidate)
 // Vue.use(Vuetify)
 Vue.use(wysiwyg, {

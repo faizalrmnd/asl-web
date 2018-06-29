@@ -30,6 +30,7 @@ module.exports = {
 
     getAllArticle(req, res, next) {
         Article.find({})
+        .sort({createdAt : -1})
         .populate('author', 'name email')
         .then(articles => {
             res.status(200).json({
@@ -57,7 +58,7 @@ module.exports = {
     deleteArticleById (req, res, next) {
         let id = req.params.id
         
-        Article.findById(id)
+        Article.findByIdAndDelete(id)
         .then(() => {
             res.status(200).json({
                 message: 'Berhasil menghapus data article'

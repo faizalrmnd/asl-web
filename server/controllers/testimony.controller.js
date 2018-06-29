@@ -52,7 +52,7 @@ module.exports = {
     deleteTestimonyById (req, res, next) {
         let id = req.params.id
         
-        Testimony.findById(id)
+        Testimony.findByIdAndDelete(id)
         .then(() => {
             res.status(200).json({
                 message: 'Berhasil menghapus data testimony'

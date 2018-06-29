@@ -213,6 +213,8 @@ export default {
             .then(message => {
                 this.success = true
                 this.message = message
+                //quick fix
+                this.$store.dispatch('testimony/getAllTestimonies')
                 setTimeout(() => {
                     this.success = false
                     this.message = ''

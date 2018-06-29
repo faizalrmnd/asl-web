@@ -52,7 +52,7 @@ module.exports = {
     deleteMerchandiseById (req, res, next) {
         let id = req.params.id
         
-        Merchandise.findById(id)
+        Merchandise.findByIdAndDelete(id)
         .then(() => {
             res.status(200).json({
                 message: 'Berhasil menghapus data merchandise'

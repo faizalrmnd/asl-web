@@ -25,7 +25,7 @@
                     <td>{{ event.address }}</td>
                     <td>
                         <div class="row">
-                            <router-link class="btn btn-primary ml-1" :to="{ name:'event-detail', params:{ id: event._id } }">Lihat Applikan</router-link>
+                            <router-link class="btn btn-primary ml-1 mb-1" :to="{ name:'event-detail', params:{ id: event._id } }">Lihat Applikan</router-link>
                             <a class="btn btn-warning ml-1" data-toggle="modal" :data-target="'#modal'+index" @click="setSelected(event)">Ubah</a>
                             <a class="btn btn-danger ml-1" @click="deleteEvent(event)">Hapus</a>
                         </div>
@@ -296,6 +296,8 @@ export default {
             .then(message => {
                 this.success = true
                 this.message = message
+                //quick fix
+                this.$store.dispatch('event/getAllEvent')
                 setTimeout(() => {
                     this.success = false
                     this.message = ''

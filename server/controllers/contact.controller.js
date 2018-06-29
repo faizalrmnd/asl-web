@@ -77,7 +77,7 @@ module.exports = {
     deleteContactById (req, res, next) {
         let id = req.params.id
         
-        Contact.findById(id)
+        Contact.findByIdAndDelete(id)
         .then(() => {
             res.status(200).json({
                 message: 'Berhasil menghapus data contact'
