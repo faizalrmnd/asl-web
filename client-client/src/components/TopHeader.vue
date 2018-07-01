@@ -22,25 +22,4 @@ export default {
 </script>
 
 <style>
-.flex-wrapper {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.company-desc {
-  margin-top: auto;
-  margin-bottom: auto;
-}
-
-.top-header {
-  padding: 140px 0 55px;
-}
-
-.flex-wrapper>div {
-  display: flex;
-  flex-direction: column;
-}
 </style>

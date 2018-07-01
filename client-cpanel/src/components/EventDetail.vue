@@ -2,21 +2,20 @@
     <div>
         <table class="table">
             <thead>
-                <td>
-                    <th>#</th>
-                    <th>Nama</th>
-                    <th>Email</th>
-                    <th>Nomor Telpon</th>
-                </td>
-                <td v-for="(applicant, index) in applicants" :key="index">
-                    <tr>{{ index + 1 }}</tr>
-                    <tr>{{ applicant.name }}</tr>
-                    <tr>{{ applicant.email }}</tr>
-                    <tr>{{ applicant.phone }}</tr>
-                </td>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nama</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Nomor Telfon</th>
+                </tr>
             </thead>
             <tbody>
-
+                <tr v-for="(applicant, index) in applicants" :key="index">
+                    <th scope="row">{{ index + 1 }}</th>
+                    <td>{{ applicant.name }}</td>
+                    <td>{{ applicant.email }}</td>
+                    <td>{{ applicant.phone }}</td>
+                </tr>
             </tbody>
         </table>
         <button class="btn btn-primary" @click="goBack">
@@ -34,7 +33,7 @@ import { mapGetters } from 'vuex'
 
 export default {
     created () {
-        this.$store.dispatch('applicant/getApplicant', this.$route.params.id)
+        this.$store.dispatch('applicant/getApplicantsByEventId', this.$route.params.id)
         .catch(msg => {
             alert(msg)
         })
@@ -48,7 +47,7 @@ export default {
 
     computed: {
         applicants () {
-            return this.$store.state.applicant.applicants
+            return this.$store.state.applicant.applicantsOnEvent
         },
         ...mapGetters({
             isLoading: 'applicant/isLoading'

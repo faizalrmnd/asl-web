@@ -27,6 +27,7 @@ module.exports = {
 
     getAllEvents(req, res, next) {
         Events.find({})
+        .sort({date: -1})
         .then(events => {
             res.status(200).json({
                 message: 'Berhasil mendapat semua events',

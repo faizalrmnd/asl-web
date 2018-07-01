@@ -28,7 +28,4 @@ export default {
 </script>
 
 <style scoped>
-  .about-text {
-    text-align: left
-  }
 </style>

@@ -5,7 +5,12 @@ export default {
 
   state: {
     contacts: [],
-    selectedContacc: {}
+    selectedContact: {},
+    isLoading: false
+  },
+
+  getters: {
+    isLoading: state => state.isLoading
   },
 
   mutations: {
@@ -29,6 +34,10 @@ export default {
     deleteContact (state, contact) {
       let index = state.contacts.indexOf(contact)
       state.contacts.splice(index, 1)
+    },
+
+    setLoading (state, payload) {
+      state.isLoading = payload
     }
   },
 
@@ -68,6 +77,7 @@ export default {
     },
 
     createContact ({ commit }, payload) {
+      commit('setLoading', true)
       return new Promise((resolve, reject) => {
         axios.post('http://localhost:3000/contact', payload, {
           headers: {
@@ -76,9 +86,11 @@ export default {
         })
           .then(res => {
             commit('insertNewContact', res.data.contact)
+            commit('setLoading', false)
             resolve(res.data.message)
           })
           .catch(err => {
+            commit('setLoading', false)
             reject(err.message)
           })
       })

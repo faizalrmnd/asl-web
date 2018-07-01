@@ -8,6 +8,7 @@ import Merchandise from './views/Merchandise.vue'
 import ContactUs from './views/ContactUs.vue'
 import ArticleDetail from './views/ArticleDetail.vue'
 import Events from './views/Events.vue'
+import EventDetail from './views/EventDetail.vue'
 
 Vue.use(Router)
 
@@ -52,6 +53,11 @@ export default new Router({
       path: '/events',
       name: 'events',
       component: Events
+    },
+    {
+      path: '/events/:id',
+      name: 'event-detail',
+      component: EventDetail
     }
   ],
   mode: 'history',

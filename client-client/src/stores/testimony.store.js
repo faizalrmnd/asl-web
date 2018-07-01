@@ -8,6 +8,10 @@ export default {
     selectedTestimony: {}
   },
 
+  getters: {
+    getAllTestimonies: state => state.testimonies
+  },
+
   mutations: {
     setAllTestimonies (state, testimonies) {
       state.testimonies = [...testimonies]

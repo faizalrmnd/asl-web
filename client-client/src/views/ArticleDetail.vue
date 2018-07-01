@@ -24,11 +24,4 @@ export default {
 </script>
 
 <style scoped>
-.single-article .title {
-  margin: 0;
-  background-color: rgba(0,0,0,0.8);
-}
-.article-content {
-  text-align: left;
-}
 </style>
