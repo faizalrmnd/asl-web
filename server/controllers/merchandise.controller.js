@@ -27,6 +27,7 @@ module.exports = {
 
     getAllMerchandise(req, res, next) {
         Merchandise.find({})
+        .sort({createdAt: -1})
         .then(merchandises => {
             res.status(200).json({
                 message: 'Berhasil mendapat semua merchandise',

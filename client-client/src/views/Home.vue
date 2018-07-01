@@ -6,7 +6,12 @@
     <TopHeader/>
     <WhatWeDo/>
     <CompanyDetails/>
-    <ArticleListHome/>
+    <section class="article-home">
+      <ArticleList/>
+    </section>
+    <section class="container-fluid background-red-custom testimony-list">
+      <TestimonyList/>
+    </section>
   </div>
 </template>
 
@@ -15,14 +20,21 @@
 import TopHeader from '../components/TopHeader.vue'
 import WhatWeDo from '../components/WhatWeDo.vue'
 import CompanyDetails from '../components/CompanyDetails.vue'
-import ArticleListHome from '../components/ArticleListHome.vue'
+import ArticleList from '../components/articleList.vue'
+import TestimonyList from '../components/TestimonyList.vue'
 
 export default {
   components: {
     TopHeader,
     WhatWeDo,
     CompanyDetails,
-    ArticleListHome
+    ArticleList,
+    TestimonyList
+  },
+  computed: {
+    path () {
+      return this.$route.path
+    }
   }
 }
 </script>
@@ -41,6 +53,12 @@ export default {
   background-size: cover;
   background-position: center;
   text-align: center;
+}
+.background-red-custom {
+  /* background-image: url('../assets/img/top-header-image-color.jpg'); */
+  background-color: #8b0000;
+  background-size: cover;
+  background-position: center;
 }
 /* .top-header .image img,
 .company-desc {

@@ -34,33 +34,4 @@ export default {
 </script>
 
 <style scoped>
-  .services {
-    text-align: left;
-    width: 100%;
-  }
-  .services img {
-    display: none;
-  }
-  .service-image {
-    /* min-height: 200px; */
-    background-size: cover;
-    background-position: top;
-    padding: 0;
-  }
-  .service-image img {
-    width: 100%;
-  }
-  .service-text {
-    padding: 40px;
-    min-height: 350px;
-    background-color: white;
-    margin-bottom: 0;
-    border: 2px solid #e8e8e8;
-    border-left: 0px solid;
-    border-radius: 0px 5px 5px 0px;
-    height: 100%;
-  }
-  h2 {
-    font-weight: 900;
-  }
 </style>

@@ -5,7 +5,14 @@ export default {
 
   state: {
     events: [],
-    selectedEvene: {}
+    selectedEvent: {},
+    isLoading: false
+  },
+
+  getters: {
+    isLoading: state => state.isLoading,
+    getAllEvent: state => state.events,
+    getEvent: state => state.selectedEvent
   },
 
   mutations: {
@@ -29,11 +36,16 @@ export default {
     deleteEvent (state, event) {
       let index = state.events.indexOf(event)
       state.events.splice(index, 1)
+    },
+
+    setLoading (state, payload) {
+      state.isLoading = payload
     }
   },
 
   actions: {
     getAllEvent ({ commit }) {
+      commit('setLoading', true)
       return new Promise((resolve, reject) => {
         axios.get('http://localhost:3000/event', {
           headers: {
@@ -42,6 +54,7 @@ export default {
         })
           .then(res => {
             commit('setAllEvent', res.data.events)
+            commit('setLoading', false)
             resolve(res.data.message)
           })
           .catch(err => {
@@ -51,6 +64,7 @@ export default {
     },
 
     getEvent ({ commit }, id) {
+      commit('setLoading', true)
       return new Promise((resolve, reject) => {
         axios.get(`http://localhost:3000/event/${id}`, {
           headers: {
@@ -59,6 +73,7 @@ export default {
         })
           .then(res => {
             commit('setSelectedEvent', res.data.event)
+            commit('setLoading', false)
             resolve(res.data.message)
           })
           .catch(err => {

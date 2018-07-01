@@ -31,17 +31,4 @@ export default {
 </script>
 
 <style>
-.animate {
-  transition-delay: .1s;
-  transition-duration: .25s;
-  transition-timing-function: ease-in;
-}
-
-.slide-up {
-  transform: translateY(0)
-}
-
-.slide-up.animate-active {
-  transform: translateY(-100px)
-}
 </style>

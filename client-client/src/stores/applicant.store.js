@@ -5,7 +5,12 @@ export default {
 
   state: {
     applicants: [],
-    selectedApplicant: {}
+    selectedApplicant: {},
+    isLoading: false
+  },
+
+  getters: {
+    isLoading: state => state.isLoading
   },
 
   mutations: {
@@ -29,6 +34,10 @@ export default {
     deleteApplicant (state, applicant) {
       let index = state.applicants.indexOf(applicant)
       state.applicants.splice(index, 1)
+    },
+
+    setLoading (state, payload) {
+      state.isLoading = payload
     }
   },
 
@@ -68,6 +77,7 @@ export default {
     },
 
     createApplicant ({ commit }, payload) {
+      commit('setLoading', true)
       return new Promise((resolve, reject) => {
         axios.post('http://localhost:3000/applicant', payload, {
           headers: {
@@ -76,9 +86,11 @@ export default {
         })
           .then(res => {
             commit('insertNewApplicant', res.data.applicant)
+            commit('setLoading', false)
             resolve(res.data.message)
           })
           .catch(err => {
+            commit('setLoading', false)
             reject(err.message)
           })
       })
