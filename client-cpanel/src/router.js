@@ -21,73 +21,85 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      component: Home
+      component: Home,
+      meta: {title: 'Home | Admin ASL'}
     },
 
     {
       path: '/register',
       name: 'register',
-      component: Register
+      component: Register,
+      meta: {title: 'Register / Login | Admin Asl'}
     },
 
     {
       path: '/admin',
       name: 'admin',
-      component: Admin
+      component: Admin,
+      meta: {title: 'User | Admin Asl'}
     },
 
     {
       path: '/artikel',
       name: 'artikel',
-      component: Article
+      component: Article,
+      meta: {title: 'Article | Admin Asl'}
     },
 
     {
       path: '/artikel/:id',
       name: 'artikel-detail',
-      component: ArticleDetail
+      component: ArticleDetail,
+      meta: {title: 'Article | Admin Asl'}
     },
 
     {
       path: '/testimoni',
       name: 'testimoni',
-      component: Testimony
+      component: Testimony,
+      meta: {title: 'Testimony | Admin Asl'}
     },
 
     {
       path: '/service',
       name: 'service',
-      component: Service
+      component: Service,
+      meta: {title: 'Service | Admin Asl'}
     },
 
     {
       path: '/merchandise',
       name: 'merchandise',
-      component: Merchandise
+      component: Merchandise,
+      meta: {title: 'Merchandise | Admin Asl'}
     },
 
     {
       path: '/event',
       name: 'event',
-      component: Events
+      component: Events,
+      meta: {title: 'Events | Admin Asl'}
     },
 
     {
       path: '/event/:id',
       name: 'event-detail',
-      component: EventDetail
+      component: EventDetail,
+      meta: {title: 'Events | Admin Asl'}
     },
 
     {
       path: '/enquiry',
       name: 'enquiry',
-      component: Enquiry
+      component: Enquiry,
+      meta: {title: 'Enquiry | Admin Asl'}
     },
 
     {
       path: '/about',
       name: 'about',
-      component: About
+      component: About,
+      meta: {title: 'About | Admin Asl'}
     }
   ]
 })

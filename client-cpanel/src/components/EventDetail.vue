@@ -34,6 +34,11 @@ import { mapGetters } from 'vuex'
 export default {
     created () {
         this.$store.dispatch('applicant/getApplicantsByEventId', this.$route.params.id)
+        .then(() => {
+            if(this.applicants[0]) {
+                window.document.title = this.applicants[0].event.name
+            }
+        })
         .catch(msg => {
             alert(msg)
         })

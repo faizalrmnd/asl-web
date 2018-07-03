@@ -73,10 +73,10 @@ import { mapGetters } from 'vuex'
 export default {
     data () {
         return {
-            title: this.$store.state.article.selectedArticle.title,
-            articleTemplate: this.$store.state.article.selectedArticle.template,
-            image: this.$store.state.article.selectedArticle.image,
-            id: this.$store.state.article.selectedArticle._id,
+            title: '',
+            articleTemplate: '',
+            image: '',
+            id: 0,
             message: '',
             success: false,
             error: false
@@ -137,8 +137,15 @@ export default {
         })
     },
     
-    created () {
+    beforeCreate () {
         this.$store.dispatch('article/getArticle', this.$route.params.id)
+        .then(() => {
+          this.title = this.$store.state.article.selectedArticle.title,
+          this.articleTemplate =  this.$store.state.article.selectedArticle.template,
+          this.image = this.$store.state.article.selectedArticle.image,
+          this.id = this.$store.state.article.selectedArticle._id,
+          window.document.title = this.$store.state.article.selectedArticle.title
+        })
         .catch(message => {
             alert(message)
         })

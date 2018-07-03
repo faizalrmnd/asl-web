@@ -17,47 +17,56 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      component: Home
+      component: Home,
+      meta: {title: 'Home | Artistik Salindia Lima'}
     },
     {
       path: '/about',
       name: 'about',
-      component: About
+      component: About,
+      meta: {title: 'About | Artistik Salindia Lima'}
     },
     {
       path: '/articles',
       name: 'articles',
-      component: Articles
+      component: Articles,
+      meta: {title: 'Articles | Artistik Salindia Lima'}
     },
     {
       path: '/articles/:id',
       name: 'article-detail',
-      component: ArticleDetail
+      component: ArticleDetail,
+      meta: {title: 'Articles | Artistik Salindia Lima'}
     },
     {
       path: '/services',
       name: 'services',
-      component: Services
+      component: Services,
+      meta: {title: 'Services | Artistik Salindia Lima'}
     },
     {
       path: '/merchandise',
       name: 'merchandise',
-      component: Merchandise
+      component: Merchandise,
+      meta: {title: 'Merchandise | Artistik Salindia Lima'}
     },
     {
       path: '/contactus',
       name: 'contactus',
-      component: ContactUs
+      component: ContactUs,
+      meta: {title: 'Contact | Artistik Salindia Lima'}
     },
     {
       path: '/events',
       name: 'events',
-      component: Events
+      component: Events,
+      meta: {title: 'Events | Artistik Salindia Lima'}
     },
     {
       path: '/events/:id',
       name: 'event-detail',
-      component: EventDetail
+      component: EventDetail,
+      meta: {title: 'Events | Artistik Salindia Lima'}
     }
   ],
   mode: 'history',
