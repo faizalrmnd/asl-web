@@ -16,8 +16,13 @@
                 </tr>
             </thead>
 
-            <tbody>
-                <tr v-for="(testimony, index) in testimonies" :key="index">
+            <paginate
+              name="testimonies"
+              :list="testimonies"
+              :per="10"
+              tag="tbody"
+            >
+                <tr v-for="(testimony, index) in paginated('testimonies')" :key="index">
                     <th scope="row">{{ index + 1 }}</th>
                     <td>{{ testimony.testimoner }}</td>
                     <td>{{ testimony.from }}</td>
@@ -70,26 +75,30 @@
                         </div>
                     </td>
                 </tr>
-            </tbody>
+            </paginate>
         </table>
         <div v-else-if="selectedMenu === 1" class="col-md-6 offset-md-3">
+            <small>* Harus di isi</small>
+            <hr>
             <div class="form-group">
-                <label>Nama</label>
-                <input type="text" class="form-control" v-model="testimoner"/>
+                <label>Nama *</label>
+                <input v-validate="'required'" name="testimoner" type="text" class="form-control" v-model="testimoner"/>
+                <small>{{ errors.first('testimoner') }}</small>
             </div>
             <div class="form-group">
-                <label>Testimoni</label>
-                <textarea cols="30" rows="10" class="form-control" v-model="testimony"></textarea>
+                <label>Testimoni *</label>
+                <textarea v-validate="'required'" name="testimony" cols="30" rows="10" class="form-control" v-model="testimony"></textarea>
+                <small>{{ errors.first('testimony') }}</small>
             </div>
             <div class="form-group">
                 <label>Asal</label>
                 <input type="text" class="form-control" v-model="from"/>
             </div>
             <div class="form-group">
-                <label>Gambar</label>
+                <label>Foto Testimoner *</label>
                 <input type="file" accept="image/*" class="form-control" placeholder="Masukan Gambar" @change="saveImage"/>
             </div>
-            <button class="btn btn-primary ml-1" @click="createTestimony">
+            <button class="btn btn-primary ml-1" @click="createTestimony" :disabled="errors.items.length != 0 || !image.name || !testimony || !testimoner">
                 <img class="icon" src="../assets/img/submit-icon.svg" alt="">
                 Simpan
             </button>
@@ -98,6 +107,16 @@
                 Batal
             </button>
         </div>
+        <paginate-links
+        v-if="selectedMenu === 0"
+        :async="true"
+        for="testimonies"
+        :show-step-links="true"
+        :step-links="{
+          next: 'Next',
+          prev: 'Prev'
+        }"
+        :hide-single-page="true"></paginate-links>
         <div v-if="isLoading" class="loading-state">
             <img src="../assets/img/loading-icon.svg" alt="">
         </div>
@@ -137,7 +156,8 @@ export default {
             from: '',
             message: '',
             success: false,
-            error: false
+            error: false,
+            paginate: ['testimonies']
         }
     },
 

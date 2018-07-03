@@ -9,6 +9,7 @@ import VueMoment from 'vue-moment'
 import './assets/css/admin-panel.css'
 import VueMq from 'vue-mq'
 import VueTruncate from 'vue-truncate-filter'
+import VuePaginate from 'vue-paginate'
 // import Vuetify from 'vuetify'
 // import '../node_modules/vuetify/dist/vuetify.min.css'
 
@@ -34,6 +35,11 @@ Vue.use(VueMoment)
 Vue.use(VueMq, {
   breakpoints: { vsmobile: 300, mobile: 767, tablet: 1024, laptop: 1200, desktop: Infinity }
 })
+router.beforeEach((to, from, next) => {
+  document.title = to.meta.title
+  next()
+})
+Vue.use(VuePaginate)
 
 new Vue({
   router,

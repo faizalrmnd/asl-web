@@ -28,6 +28,10 @@ Vue.use(VueCurrencyFilter, {
   symbolSpacing: true
 })
 Vue.use(VueMoment)
+router.beforeEach((to, from, next) => {
+  document.title = to.meta.title
+  next()
+})
 
 new Vue({
   router,

@@ -16,6 +16,9 @@ export default {
   },
   beforeCreate () {
     this.$store.dispatch('article/getArticle', this.$route.params.id)
+      .then(() => {
+        window.document.title = this.article.title
+      })
       .catch(message => {
         alert(message)
       })

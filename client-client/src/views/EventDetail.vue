@@ -54,6 +54,9 @@ export default {
   },
   beforeCreate () {
     this.$store.dispatch('event/getEvent', this.$route.params.id)
+      .then(() => {
+        window.document.title = this.event.name
+      })
       .catch(message => {
         alert(message)
       })

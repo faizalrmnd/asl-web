@@ -16,8 +16,13 @@
                 </tr>
             </thead>
 
-            <tbody>
-                <tr v-for="(article, index) in articles" :key="index">
+            <paginate
+              name="articles"
+              :list="articles"
+              :per="10"
+              tag="tbody"
+            >
+                <tr v-for="(article, index) in paginated('articles')" :key="index">
                     <th scope="row">{{ index + 1 }}</th>
                     <td>{{ article.title }}</td>
                     <td>{{article.createdAt | moment("from")}}</td>
@@ -29,24 +34,29 @@
                         </div>
                     </td>
                 </tr>
-            </tbody>
+            </paginate>
         </table>
         <div v-else-if="selectedMenu === 1">
+            <small>* Harus di isi</small>
+            <hr>
             <form>
                 <div class="form-group">
-                    <label>Judul Artikel</label>
-                    <input type="text" class="form-control" placeholder="Masukan Judul" v-model="title">
+                    <label>Judul Artikel *</label>
+                    <input v-validate="'required'" name="title" type="text" class="form-control" placeholder="Masukan Judul" v-model="title">
+                    <small>{{ errors.first('title') }}</small>
                 </div>
                 <div class="form-group featured-image">
-                    <label>Featured Image</label>
-                    <input type="file" accept="image/*" class="form-control" placeholder="Masukan Featured image" @change="saveImage">
+                    <label>Featured Image *</label>
+                    <input v-validate="'required'" type="file" accept="image/*" class="form-control" placeholder="Masukan Featured image" @change="saveImage" required>
                 </div>
-
+                <!-- {{this.$refs.image}} -->
                 <div class="form-group">
+                    <label>Article Content *</label>
                     <wysiwyg v-model="articleTemplate" />
+                    <!-- <small>{{ errors.first('content') }}</small> -->
                 </div>
 
-                <button class="btn btn-primary ml-1" @click.prevent="createArticle">
+                <button class="btn btn-primary ml-1" @click.prevent="createArticle" :disabled="errors.items.length != 0 || !image.name || !articleTemplate || !title">
                     <img class="icon" src="../assets/img/submit-icon.svg" alt="">
                     Submit
                 </button>
@@ -56,6 +66,16 @@
                 </button>
             </form>            
         </div>
+        <paginate-links
+        v-if="selectedMenu === 0"
+        :async="true"
+        for="articles"
+        :show-step-links="true"
+        :step-links="{
+          next: 'Next',
+          prev: 'Prev'
+        }"
+        :hide-single-page="true"></paginate-links>
         <div v-if="isLoading" class="loading-state">
             <img src="../assets/img/loading-icon.svg" alt="">
         </div>
@@ -95,7 +115,8 @@ export default {
             image: '',
             message: '',
             success: false,
-            error: false
+            error: false,
+            paginate: ['articles']
         }
     },
 

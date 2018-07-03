@@ -16,8 +16,13 @@
                 </tr>
             </thead>
 
-            <tbody>
-                <tr v-for="(service, index) in services" :key="index">
+            <paginate
+              name="services"
+              :list="services"
+              :per="10"
+              tag="tbody"
+            >
+                <tr v-for="(service, index) in paginated('services')" :key="index">
                     <th scope="row">{{ index + 1 }}</th>
                     <td>{{ service.name }}</td>
                     <td>{{ service.description | truncate(80) }}</td>
@@ -66,22 +71,26 @@
                         </div>
                     </td>
                 </tr>
-            </tbody>
+            </paginate>
         </table>
         <div v-else-if="selectedMenu === 1" class="col-md-6 offset-md-3">
+            <small>* Harus di isi</small>
+            <hr>
             <div class="form-group">
-                <label>Nama</label>
-                <input type="text" class="form-control" v-model="name"/>
+                <label>Nama *</label>
+                <input v-validate="'required'" type="text" class="form-control" name="name" v-model="name"/>
+                <small>{{ errors.first('name') }}</small>
             </div>
             <div class="form-group">
-                <label>Deskripsi</label>
-                <textarea cols="30" rows="10" class="form-control" v-model="description"></textarea>
+                <label>Deskripsi *</label>
+                <textarea v-validate="'required'" cols="30" rows="10" class="form-control" name="description" v-model="description"></textarea>
+                <small>{{ errors.first('description') }}</small>
             </div>
             <div class="form-group">
-                <label>Gambar</label>
+                <label>Gambar *</label>
                 <input type="file" accept="image/*" class="form-control" placeholder="Masukan Gambar" @change="saveImage"/>
             </div>
-            <button class="btn btn-primary ml-1" @click="createservice">
+            <button class="btn btn-primary ml-1" @click="createservice" :disabled="errors.items.length != 0 || !image.name || !name || !description">
                 <img class="icon" src="../assets/img/submit-icon.svg" alt="">
                 Simpan
             </button>
@@ -90,6 +99,16 @@
                 Batal
             </button>
         </div>
+        <paginate-links
+        v-if="selectedMenu === 0"
+        :async="true"
+        for="services"
+        :show-step-links="true"
+        :step-links="{
+          next: 'Next',
+          prev: 'Prev'
+        }"
+        :hide-single-page="true"></paginate-links>
         <div v-if="isLoading" class="loading-state">
             <img src="../assets/img/loading-icon.svg" alt="">
         </div>
@@ -129,7 +148,8 @@ export default {
             description: '',
             message: '',
             success: false,
-            error: false
+            error: false,
+            paginate: ['services']
         }
     },
 

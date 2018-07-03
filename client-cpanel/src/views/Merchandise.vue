@@ -17,8 +17,13 @@
                 </tr>
             </thead>
 
-            <tbody>
-                <tr v-for="(merchandise, index) in merchandises" :key="index">
+            <paginate
+              name="merchandises"
+              :list="merchandises"
+              :per="10"
+              tag="tbody"
+            >
+                <tr v-for="(merchandise, index) in paginated('merchandises')" :key="index">
                     <th scope="row">{{ index + 1 }}</th>
                     <td>{{ merchandise.name }}</td>
                     <td>{{ merchandise.description }}</td>
@@ -72,26 +77,31 @@
                         </div>
                     </td>
                 </tr>
-            </tbody>
+            </paginate>
         </table>
         <div v-else-if="selectedMenu === 1" class="col-md-6 offset-md-3">
+            <small>* Harus di isi</small>
+            <hr>
             <div class="form-group">
-                <label>Nama</label>
-                <input type="text" class="form-control" v-model="name"/>
+                <label>Nama *</label>
+                <input v-validate="'required'" type="text" class="form-control" name="name" v-model="name"/>
+                <small>{{ errors.first('name') }}</small>
             </div>
             <div class="form-group">
-                <label>Deskripsi</label>
-                <textarea cols="30" rows="10" class="form-control" v-model="description"></textarea>
+                <label>Deskripsi *</label>
+                <textarea v-validate="'required'" cols="30" rows="10" class="form-control" name="description" v-model="description"></textarea>
+                <small>{{ errors.first('description') }}</small>
             </div>
             <div class="form-group">
-                <label>Price</label>
-                <input type="number" min="0" class="form-control" v-model="price"/>
+                <label>Price *</label>
+                <input v-validate="'required|numeric'" type="number" min="0" class="form-control" name="price" v-model="price"/>
+                <small>{{ errors.first('price') }}</small>
             </div>
             <div class="form-group">
-                <label>Gambar</label>
+                <label>Gambar *</label>
                 <input type="file" accept="image/*" class="form-control" placeholder="Masukan Gambar" @change="saveImage"/>
             </div>
-            <button class="btn btn-primary ml-1" @click="createMerchandise">
+            <button class="btn btn-primary ml-1" @click="createMerchandise" :disabled="errors.items.length != 0 || !image.name || !name || !description || !price">
                 <img class="icon" src="../assets/img/submit-icon.svg" alt="">
                 Simpan
             </button>
@@ -100,6 +110,16 @@
                 Batal
             </button>
         </div>
+        <paginate-links
+        v-if="selectedMenu === 0"
+        :async="true"
+        for="merchandises"
+        :show-step-links="true"
+        :step-links="{
+          next: 'Next',
+          prev: 'Prev'
+        }"
+        :hide-single-page="true"></paginate-links>
         <div v-if="isLoading" class="loading-state">
             <img src="../assets/img/loading-icon.svg" alt="">
         </div>
@@ -140,7 +160,8 @@ export default {
             price: 0,
             message: '',
             success: false,
-            error: false
+            error: false,
+            paginate: ['merchandises']
         }
     },
 

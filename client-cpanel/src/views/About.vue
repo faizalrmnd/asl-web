@@ -57,7 +57,7 @@ export default {
     data () {
         return {
             selectedMenu: 0,
-            template: this.$store.state.about.about.template,
+            template: '',
             message: '',
             success: false,
             error: false
@@ -112,9 +112,15 @@ export default {
 
     beforeCreate () {
         this.$store.dispatch('about/getAbout')
+        .then(() => {
+          this.template = this.$store.state.about.about.template
+        })
         .catch(message => {
             alert(message)
         })
+    },
+    created () {
+        
     }
 }
 </script>

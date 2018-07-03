@@ -15,6 +15,7 @@
     "vue-currency-filter": "^2.2.6",
     "vue-moment": "^4.0.0",
     "vue-mq": "^0.2.1",
+    "vue-paginate": "^3.6.0",
     "vue-router": "^3.0.1",
     "vue-truncate-filter": "^1.1.7",
     "vue-wysiwyg": "^1.7.2",
