@@ -10,6 +10,9 @@ import './assets/css/admin-panel.css'
 import VueMq from 'vue-mq'
 import VueTruncate from 'vue-truncate-filter'
 import VuePaginate from 'vue-paginate'
+import Datetime from 'vue-datetime'
+// You need a specific loader for CSS files
+import '../node_modules/vue-datetime/dist/vue-datetime.css'
 // import Vuetify from 'vuetify'
 // import '../node_modules/vuetify/dist/vuetify.min.css'
 
@@ -40,6 +43,7 @@ router.beforeEach((to, from, next) => {
   next()
 })
 Vue.use(VuePaginate)
+Vue.use(Datetime)
 
 new Vue({
   router,
