@@ -54,7 +54,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Tanggal</label>
-                                    <input type="date" class="form-control" v-model="selectedEvent.date"/>
+                                    <!-- <input type="date" class="form-control" v-model="selectedEvent.date"/> -->
+                                    <datetime :minute-step=15 type="datetime" v-model="selectedEvent.date"></datetime>
                                 </div>
                                 <div class="form-group">
                                     <label>Alamat</label>
@@ -99,9 +100,10 @@
                 <small>{{ errors.first('description') }}</small>
             </div>
             <div class="form-group">
-                <label>Tanggal *</label>
-                <input v-validate="'required'" name="date" type="date" class="form-control" v-model="date"/>
-                <small>{{ errors.first('date') }}</small>
+                <label>Tanggal dan waktu *</label>
+                <!-- <input v-validate="'required'" name="date" type="date" class="form-control" v-model="date"/> -->
+                <datetime :minute-step=15 type="datetime" v-model="date"></datetime>
+                <!-- <small>{{ errors.first('date') }}</small> -->
             </div>
             <div class="form-group">
                 <label>Alamat *</label>
@@ -173,7 +175,7 @@ export default {
             image: '',
             name: '',
             description: '',
-            date: new Date(),
+            date: '',
             address: '',
             latitude: '',
             longitude: '',
