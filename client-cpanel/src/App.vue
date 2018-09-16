@@ -1,31 +1,66 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <div v-if="!loggedIn">
+      <router-view/>
     </div>
-    <router-view/>
+    <div v-else>
+      <div class="row">
+        <TopNav/>
+        <transition 
+        name="custom-classes-transition"
+        enter-active-class="animated slideInLeft"
+        leave-active-class="animated slideOutLeft">
+          <NavMenu v-if="sidebarOpened"/>
+        </transition>
+        <div class="content-side" v-bind:class="{ 'col-md-10 offset-md-2': sidebarOpened, 'col-md-12': !sidebarOpened }" >
+          <router-view/>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-}
+<script>
+import NavMenu from './components/NavMenu'
+import TopNav from './components/TopNav'
+import { mapGetters } from 'vuex'
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
+export default {
+  components: {
+    NavMenu,
+    TopNav
+  },
 
-#nav a.router-link-exact-active {
-  color: #42b983;
+  computed: {
+    loggedIn () {
+      return this.$store.state.admin.loggedIn
+    },
+    ...mapGetters({
+      sidebarOpened: 'sidenav/sidebarOpened',
+      isLoading: 'admin/isLoading'
+    })
+  },
+
+  mounted () {
+    if (this.$mq == 'mobile') {
+        this.$store.dispatch('sidenav/changeSidebarOpened', false)
+    }
+  },
+
+  beforeCreate () {
+    // Buat verify token, ini token buatan kita atau orang lain
+    // kalau buatan kita, nanti simpan data user di store
+    if (localStorage.getItem('adminToken')) {
+      this.$store.dispatch('admin/verifyToken')
+      .catch(err => {
+        localStorage.removeItem('adminToken')
+        alert('Tolong log in ulang')
+        this.$router.push('/register')
+      })
+    } else {
+      this.$router.push('/register')
+    }
+  }
 }
-</style>
+</script>
+

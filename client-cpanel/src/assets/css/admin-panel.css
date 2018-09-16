@@ -1,0 +1,435 @@
+body {
+  -webkit-font-smoothing: antialiased;
+  background-color: #fafafa;
+}
+
+.no-padding {
+  padding: 0px;
+}
+
+a.btn {
+  color: white !important;
+}
+
+a.btn.btn-warning {
+  color: #23262b !important;
+}
+
+.btn {
+  border-radius: 2px;
+}
+
+.btn .icon {
+  width: 22px;
+  margin-top: -3px;
+  margin-right: 5px;
+}
+
+.btn-primary {
+  background-color: blue;
+  border-color: blue;
+}
+
+.btn-primary:disabled {
+  cursor: not-allowed;
+}
+
+.btn-danger {
+  background-color: red;
+  border-color: red;
+}
+
+thead {
+  background-color: #545e66;
+  color: #fff;
+  border-radius: 0;
+}
+
+tbody tr {
+  background-color: white;
+  border: 1px solid #e0e0e0 !important;
+}
+
+tbody tr:hover {
+  background-color: #fafafa;
+}
+
+tbody:before {
+  content: "-";
+  display: block;
+  line-height: 1em;
+  color: transparent;
+}
+
+ul.paginate-links li {
+  display: inline-block;
+  margin: 5px;
+  cursor: pointer;
+  padding-top: 5px;
+}
+
+ul.paginate-links .left-arrow, ul.paginate-links .right-arrow {
+  padding: 7px 17px;
+  color: blue;
+  border-radius: 4px;
+  font-weight: 700;
+  border: 2px solid;
+  background-color: transparent;
+}
+
+ul.paginate-links .left-arrow:hover, ul.paginate-links .right-arrow:hover {
+  opacity: 0.5;
+  transition: all 0.3s;
+}
+
+ul.paginate-links .left-arrow {
+  margin-right: 15px;
+}
+
+ul.paginate-links .right-arrow {
+  margin-left: 15px;
+}
+
+ul.paginate-links .number {
+  width: 38px;
+  height: 38px;
+}
+
+ul.paginate-links .number:hover {
+  opacity: 0.5;
+  transition: all 0.3s;
+}
+
+ul.paginate-links .number.active:hover {
+  opacity: 1;
+  cursor: unset;
+}
+
+ul.paginate-links .number.active {
+  background-color: blue;
+  border-radius: 2px;
+  transition: all 0.3s;
+}
+
+ul.paginate-links .number.active a {
+  color: #fff;
+}
+
+ul.paginate-links .number a {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+ul.paginate-links {
+  margin-top: 60px;
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.editr {
+  background-color: white;
+}
+
+.row {
+  margin: 0;
+}
+
+img {
+  max-width: 100%;
+}
+
+.dark-bg {
+  color: white;
+}
+
+.animated {
+  animation-duration: 0.2s;
+}
+
+.top-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: white;
+  border-bottom: 1px solid #d7d7d7;
+  z-index:10;
+  transition: all 0.2s;
+}
+
+.top-navbar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.top-navbar li {
+  float: left;
+}
+
+.top-navbar li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  color: #23262b;
+}
+
+.fadein-enter-active, .fadein-leave-active {
+  transition: all .5s;
+}
+
+.fadein-leave-to {
+  width: 0;
+}
+
+.fadein-enter-to {
+  width: initial;
+}
+
+.nav-logo {
+  width: 20px;
+}
+
+.sidebar-nav-group {
+  margin-top:0px;
+}
+
+.navbar-side {
+  background-color: #2f353a;
+  position: fixed;
+  height: 100%;
+  padding: 0;
+  overflow-y: scroll;
+  z-index: 5;
+  border-right: 1px solid;
+}
+
+.burger-icon {
+  width: 52px;
+  height: 52px;
+  padding: 20px 8px 15px 22px;
+  cursor: pointer
+}
+
+.burger-line {
+  background-color: #444;
+  width: 100%;
+  height: 2px;
+  margin-bottom: 5px;
+}
+
+.nav.content-headings {
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.nav.content-headings .content-heading {
+  cursor: pointer;
+  opacity: 0.5;
+}
+
+.nav.content-headings .content-heading:hover {
+  opacity: 1;
+}
+
+.nav.content-headings .content-heading.active {
+  font-weight: 900;
+  border-bottom: 1px solid;
+  opacity: 1;
+}
+
+.list-group-item.brand-logo img {
+  width: 40px;
+}
+
+.register-form .brand-logo {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.brand-logo img {
+  width: 60px;
+}
+
+.list-group-item.brand-logo:hover {
+  background-color: transparent;
+  cursor: unset;
+}
+
+small a {
+  color: #eeb303 !important;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.register-form {
+  position: absolute;
+  padding: 50px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.heading {
+  margin-top: 40px;
+}
+
+.heading-text {
+  margin: 10px 0 20px;
+  font-weight: 700;
+}
+
+.router-link-active.router-link-active {
+  background-color: #3a4248;
+  border: 1px solid #23262b;
+  border-left: 0px;
+  border-right: 0px;
+}
+
+.router-link-active.list-group-item a {
+  color: #ffd34f !important;
+  font-weight: 700;
+}
+
+.list-group-item:hover {
+  background-color: blue;
+  cursor: pointer;
+}
+
+.list-group-item {
+  background-color: transparent;
+  border: 0px solid;
+  padding: 0.75rem 2rem;
+}
+
+.list-group-item a {
+  color:white !important;
+  font-size: 15px;
+}
+
+.list-group-item a:hover {
+  text-decoration: unset;
+}
+
+.list-group-item img {
+  display: inline-block;
+  width: 25px;
+  margin-right: 30px;
+}
+
+.content-side {
+  padding: 70px;
+  transition: all 0.2s;
+  /* z-index: 0; */
+}
+
+.admin-detail {
+  padding: 50px;
+}
+
+.admin-detail p {
+  margin-bottom: 4px;
+}
+
+.admin-detail .admin-name {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.google-map {
+  margin-top: 20px;
+  max-width: 100%;
+}
+
+.admin-detail img {
+  margin-bottom: 20px;
+}
+
+.form-group small {
+  color: red;
+  font-style: italic;
+}
+
+.form-group.featured-image {
+  width: 50%;
+}
+
+.vdatetime-input {
+  display: block;
+  width: 100%;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: .25rem;
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.loading-state.register-page {
+  width: 100%;
+  background-color: rgba(255,255,255,1);
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.loading-state {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  min-height: 100%;
+  background-color: rgba(255,255,255,0.8);
+}
+
+.loading-state>img, .loading-state>div {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.loading-state>.card {
+  padding: 50px;
+  display: inline-block;
+}
+
+.loading-state>.card>img {
+  width: 25px;
+  display: inline-block;
+  margin-right: 10px;
+  margin-top: -2px;
+}
+
+.loading-state p {
+  font-weight: 700;
+  display: inline-block;
+  margin-bottom: 0;
+}
+
+.success p {
+  color: #00d300;
+}
+
+.error p {
+  color: red;
+}
+
+.loading-state>img {
+  width: 80px;
+}
+
+@media screen and (max-width: 767px) {
+  .content-side {
+    padding: 70px 10px;
+  }
+  .navbar-side {
+    margin-top: 50px;
+  }
+}
