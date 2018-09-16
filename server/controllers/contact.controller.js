@@ -1,16 +1,8 @@
 const Contact = require('../models/contact.model')
-const nodemailer = require("nodemailer")
+const transporter = require('../helpers/contact.helper')
 
-const user = process.env.EMAIL
-const pass = process.env.EMAIL_PASS
+const userEmail = process.env.EMAIL
 
-var transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-        user: `${user}`,
-        pass: `${pass}`
-    }
-});
 module.exports = {
     createContact (req, res, next) {
         req.body.isResponded = false
@@ -32,7 +24,7 @@ module.exports = {
             let contact = await Contact.findByIdAndUpdate(id, {isResponded: true}, { new: true })
 
             let mailOptions = {
-                from: `${user}`,
+                from: `${userEmail}`,
                 to: `${contact.email}`,
                 subject: req.body.subject,
                 text: req.body.message
