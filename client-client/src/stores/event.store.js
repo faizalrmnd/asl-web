@@ -47,7 +47,7 @@ export default {
     getAllEvent ({ commit }) {
       commit('setLoading', true)
       return new Promise((resolve, reject) => {
-        axios.get('http://localhost:3000/event', {
+        axios.get('http://35.197.150.118/event', {
           headers: {
             token: localStorage.getItem('adminToken')
           }
@@ -66,7 +66,7 @@ export default {
     getEvent ({ commit }, id) {
       commit('setLoading', true)
       return new Promise((resolve, reject) => {
-        axios.get(`http://localhost:3000/event/${id}`, {
+        axios.get(`http://35.197.150.118/event/${id}`, {
           headers: {
             token: localStorage.getItem('adminToken')
           }
@@ -84,7 +84,7 @@ export default {
 
     createEvent ({ commit }, payload) {
       return new Promise((resolve, reject) => {
-        axios.post('http://localhost:3000/event', payload, {
+        axios.post('http://35.197.150.118/event', payload, {
           headers: {
             token: localStorage.getItem('adminToken')
           }
@@ -103,7 +103,7 @@ export default {
       return new Promise((resolve, reject) => {
         let id = payload.id
         delete payload.id
-        axios.put(`http://localhost:3000/event/${id}`, payload, {
+        axios.put(`http://35.197.150.118/event/${id}`, payload, {
           headers: {
             token: localStorage.getItem('adminToken')
           }
@@ -122,7 +122,7 @@ export default {
       return new Promise((resolve, reject) => {
         let id = payload._id
         delete payload._id
-        axios.delete(`http://localhost:3000/event/${id}`, {
+        axios.delete(`http://35.197.150.118/event/${id}`, {
           headers: {
             token: localStorage.getItem('adminToken')
           }

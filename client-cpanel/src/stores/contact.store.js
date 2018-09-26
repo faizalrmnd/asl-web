@@ -35,7 +35,7 @@ export default {
   actions: {
     getAllcontacts ({ commit }) {
       return new Promise((resolve, reject) => {
-        axios.get('http://localhost:3000/contact', {
+        axios.get('http://35.197.150.118/contact', {
           headers: {
             token: localStorage.getItem('adminToken')
           }
@@ -52,7 +52,7 @@ export default {
 
     getContact ({ commit }, id) {
       return new Promise((resolve, reject) => {
-        axios.get(`http://localhost:3000/contact/${id}`, {
+        axios.get(`http://35.197.150.118/contact/${id}`, {
           headers: {
             token: localStorage.getItem('adminToken')
           }
@@ -69,7 +69,7 @@ export default {
 
     createContact ({ commit }, payload) {
       return new Promise((resolve, reject) => {
-        axios.post('http://localhost:3000/contact', payload, {
+        axios.post('http://35.197.150.118/contact', payload, {
           headers: {
             token: localStorage.getItem('adminToken')
           }
@@ -94,8 +94,8 @@ export default {
         delete payload.id
         delete payload.subject
         delete payload.message
-
-        axios.put(`http://localhost:3000/contact/${id}`, email, {
+        console.log(email)
+        axios.put(`http://35.197.150.118/contact/${id}`, email, {
           headers: {
             token: localStorage.getItem('adminToken')
           }
@@ -114,7 +114,7 @@ export default {
       return new Promise((resolve, reject) => {
         let id = payload._id
         delete payload._id
-        axios.delete(`http://localhost:3000/contact/${id}`, {
+        axios.delete(`http://35.197.150.118/contact/${id}`, {
           headers: {
             token: localStorage.getItem('adminToken')
           }

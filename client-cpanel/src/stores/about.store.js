@@ -25,7 +25,7 @@ export default {
     getAbout ({ commit }) {
       commit('setLoading', true)
       return new Promise((resolve, reject) => {
-        axios.get('http://localhost:3000/about', {
+        axios.get('http://35.197.150.118/about', {
           headers: {
             token: localStorage.getItem('adminToken')
           }
@@ -44,7 +44,7 @@ export default {
     createUpdateAbout ({ commit }, payload) {
       commit('setLoading', true)
       return new Promise((resolve, reject) => {
-        axios.post(`http://localhost:3000/about`, payload, {
+        axios.post(`http://35.197.150.118/about`, payload, {
           headers: {
             token: localStorage.getItem('adminToken')
           }

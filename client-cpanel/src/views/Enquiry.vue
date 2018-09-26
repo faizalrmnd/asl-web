@@ -166,7 +166,7 @@ export default {
             this.selectedContact.subject = this.subject
             this.message = this.message
 
-            let payload = {...this.selectedContact}
+            let payload = {...this.selectedContact, message: this.message}
 
             this.selectedContact = {}
             this.subject = ''
