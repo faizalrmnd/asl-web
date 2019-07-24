@@ -39,7 +39,7 @@ export default {
   actions: {
     getAllTestimonies ({ commit }) {
       return new Promise((resolve, reject) => {
-        axios.get('http://localhost:3000/testimony', {
+        axios.get('http://35.197.150.118/testimony', {
           headers: {
             token: localStorage.getItem('adminToken')
           }
@@ -56,7 +56,7 @@ export default {
 
     getTestimony ({ commit }, id) {
       return new Promise((resolve, reject) => {
-        axios.get(`http://localhost:3000/testimony/${id}`, {
+        axios.get(`http://35.197.150.118/testimony/${id}`, {
           headers: {
             token: localStorage.getItem('adminToken')
           }
@@ -73,7 +73,7 @@ export default {
 
     createTestimony ({ commit }, payload) {
       return new Promise((resolve, reject) => {
-        axios.post('http://localhost:3000/testimony', payload, {
+        axios.post('http://35.197.150.118/testimony', payload, {
           headers: {
             token: localStorage.getItem('adminToken')
           }
@@ -92,7 +92,7 @@ export default {
       return new Promise((resolve, reject) => {
         let id = payload.id
         delete payload.id
-        axios.put(`http://localhost:3000/testimony/${id}`, payload, {
+        axios.put(`http://35.197.150.118/testimony/${id}`, payload, {
           headers: {
             token: localStorage.getItem('adminToken')
           }
@@ -111,7 +111,7 @@ export default {
       return new Promise((resolve, reject) => {
         let id = payload._id
         delete payload._id
-        axios.delete(`http://localhost:3000/testimony/${id}`, {
+        axios.delete(`http://35.197.150.118/testimony/${id}`, {
           headers: {
             token: localStorage.getItem('adminToken')
           }

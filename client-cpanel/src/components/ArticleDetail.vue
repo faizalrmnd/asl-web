@@ -8,7 +8,7 @@
                         <input type="text" class="form-control" placeholder="Masukan Judul" v-model="title">
                     </div>
                     <div class="form-group featured-image">
-                        <img :src="image"/>
+                        <img :src="image" :style="{display: (typeof image === 'string') ? 'block' : 'none'}"/>
                         <label>Featured Image</label>
                         <input type="file" accept="image/*" class="form-control" placeholder="Masukan Featured image" @change="saveImage">
                     </div>

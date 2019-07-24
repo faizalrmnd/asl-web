@@ -35,7 +35,7 @@ export default {
   actions: {
     getAllService ({ commit }) {
       return new Promise((resolve, reject) => {
-        axios.get('http://localhost:3000/service', {
+        axios.get('http://35.197.150.118/service', {
           headers: {
             token: localStorage.getItem('adminToken')
           }
@@ -52,7 +52,7 @@ export default {
 
     getService ({ commit }, id) {
       return new Promise((resolve, reject) => {
-        axios.get(`http://localhost:3000/service/${id}`, {
+        axios.get(`http://35.197.150.118/service/${id}`, {
           headers: {
             token: localStorage.getItem('adminToken')
           }
@@ -69,7 +69,7 @@ export default {
 
     createService ({ commit }, payload) {
       return new Promise((resolve, reject) => {
-        axios.post('http://localhost:3000/service', payload, {
+        axios.post('http://35.197.150.118/service', payload, {
           headers: {
             token: localStorage.getItem('adminToken')
           }
@@ -88,7 +88,7 @@ export default {
       return new Promise((resolve, reject) => {
         let id = payload.id
         delete payload.id
-        axios.put(`http://localhost:3000/service/${id}`, payload, {
+        axios.put(`http://35.197.150.118/service/${id}`, payload, {
           headers: {
             token: localStorage.getItem('adminToken')
           }
@@ -107,7 +107,7 @@ export default {
       return new Promise((resolve, reject) => {
         let id = payload._id
         delete payload._id
-        axios.delete(`http://localhost:3000/service/${id}`, {
+        axios.delete(`http://35.197.150.118/service/${id}`, {
           headers: {
             token: localStorage.getItem('adminToken')
           }

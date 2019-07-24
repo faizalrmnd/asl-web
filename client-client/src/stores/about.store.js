@@ -16,7 +16,7 @@ export default {
   actions: {
     getAbout ({ commit }) {
       return new Promise((resolve, reject) => {
-        axios.get('http://localhost:3000/about', {
+        axios.get('http://35.197.150.118/about', {
           headers: {
             token: localStorage.getItem('adminToken')
           }

@@ -58,7 +58,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Gambar</label>
-                                        <img :src="selectedMerchandise.image">
+                                        <img :src="selectedMerchandise.image" :style="{display: (typeof selectedMerchandise.image === 'string') ? 'block' : 'none'}">
                                         <input type="file" accept="image/*" class="form-control" placeholder="Masukan Gambar" @change="updateImage"/>
                                     </div>
                             </div>

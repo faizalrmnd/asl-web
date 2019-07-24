@@ -22,7 +22,7 @@ Vue.use(VeeValidate)
 // Vue.use(Vuetify)
 Vue.use(wysiwyg, {
   image: {
-    uploadURL: 'http://localhost:3000/image',
+    uploadURL: 'http://35.197.150.118/image',
     dropzoneOptions: {}
   }
 })

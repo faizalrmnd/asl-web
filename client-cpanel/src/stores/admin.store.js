@@ -31,7 +31,7 @@ export default {
     verifyToken ({ commit }) {
       commit('setLoading', true)
       return new Promise((resolve, reject) => {
-        axios.get('http://localhost:3000/token', {
+        axios.get('http://35.197.150.118/token', {
           headers: {
             token: localStorage.getItem('adminToken')
           }
@@ -52,7 +52,7 @@ export default {
     register ({ commit }, payload) {
       commit('setLoading', true)
       return new Promise((resolve, reject) => {
-        axios.post('http://localhost:3000/users/register', payload)
+        axios.post('http://35.197.150.118/users/register', payload)
           .then((res) => {
             localStorage.setItem('adminToken', res.headers.token)
             commit('setUser', res.data.user)
@@ -69,7 +69,7 @@ export default {
     login ({ commit }, payload) {
       commit('setLoading', true)
       return new Promise((resolve, reject) => {
-        axios.post('http://localhost:3000/users/login', payload)
+        axios.post('http://35.197.150.118/users/login', payload)
           .then((res) => {
             localStorage.setItem('adminToken', res.headers.token)
             commit('setUser', res.data.user)
@@ -86,7 +86,7 @@ export default {
     updateAccount ({ commit }, payload) {
       commit('setLoading', true)
       return new Promise((resolve, reject) => {
-        axios.put('http://localhost:3000/users', payload, {
+        axios.put('http://35.197.150.118/users', payload, {
           headers: {
             token: localStorage.getItem('adminToken')
           }
@@ -105,7 +105,7 @@ export default {
     changePassword ({ commit }, payload) {
       commit('setLoading', true)
       return new Promise((resolve, reject) => {
-        axios.put('http://localhost:3000/users/pass', payload, {
+        axios.put('http://35.197.150.118/users/pass', payload, {
           headers: {
             token: localStorage.getItem('adminToken')
           }
@@ -123,7 +123,7 @@ export default {
     deleteAccount ({ commit }) {
       commit('setLoading', true)
       return new Promise((resolve, reject) => {
-        axios.delete(`http://localhost:3000/users/`, {
+        axios.delete(`http://35.197.150.118/users/`, {
           headers: {
             token: localStorage.getItem('adminToken')
           }

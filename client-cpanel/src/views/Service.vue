@@ -52,7 +52,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Gambar</label>
-                                        <img :src="selectedService.image">
+                                        <img :src="selectedService.image" :style="{display: (typeof selectedService.image === 'string') ? 'block' : 'none'}">
                                         <input type="file" accept="image/*" class="form-control" placeholder="Masukan Gambar" @change="updateImage"/>
                                     </div>
                             </div>

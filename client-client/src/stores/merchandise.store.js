@@ -35,7 +35,7 @@ export default {
   actions: {
     getAllMerchandise ({ commit }) {
       return new Promise((resolve, reject) => {
-        axios.get('http://localhost:3000/merchandise', {
+        axios.get('http://35.197.150.118/merchandise', {
           headers: {
             token: localStorage.getItem('adminToken')
           }
@@ -52,7 +52,7 @@ export default {
 
     getMerchandise ({ commit }, id) {
       return new Promise((resolve, reject) => {
-        axios.get(`http://localhost:3000/merchandise/${id}`, {
+        axios.get(`http://35.197.150.118/merchandise/${id}`, {
           headers: {
             token: localStorage.getItem('adminToken')
           }
@@ -69,7 +69,7 @@ export default {
 
     createMerchandise ({ commit }, payload) {
       return new Promise((resolve, reject) => {
-        axios.post('http://localhost:3000/merchandise', payload, {
+        axios.post('http://35.197.150.118/merchandise', payload, {
           headers: {
             token: localStorage.getItem('adminToken')
           }
@@ -88,7 +88,7 @@ export default {
       return new Promise((resolve, reject) => {
         let id = payload.id
         delete payload.id
-        axios.put(`http://localhost:3000/merchandise/${id}`, payload, {
+        axios.put(`http://35.197.150.118/merchandise/${id}`, payload, {
           headers: {
             token: localStorage.getItem('adminToken')
           }
@@ -107,7 +107,7 @@ export default {
       return new Promise((resolve, reject) => {
         let id = payload._id
         delete payload._id
-        axios.delete(`http://localhost:3000/merchandise/${id}`, {
+        axios.delete(`http://35.197.150.118/merchandise/${id}`, {
           headers: {
             token: localStorage.getItem('adminToken')
           }

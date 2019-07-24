@@ -20,7 +20,7 @@ const sendUploadToGCS = (req, res, next) => {
     return next()
   }
 
-  const gcsname = req.file.originalname
+  const gcsname = Date.now().toString()
   const file = bucket.file(gcsname)
 
   const stream = file.createWriteStream({
@@ -74,7 +74,7 @@ limits: {
     fileSize: 5 * 1024 * 1024
 },
 fileFilter (req, file, cb) {
-  if (!req.body.image) {
+  if (!file && !file.mimetype.includes('image')) {
     // skip image pas upload kalau tidak ada image
     return cb(null, false)
   }

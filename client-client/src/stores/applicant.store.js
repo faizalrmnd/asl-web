@@ -44,7 +44,7 @@ export default {
   actions: {
     getAllApplicant ({ commit }) {
       return new Promise((resolve, reject) => {
-        axios.get('http://localhost:3000/applicant', {
+        axios.get('http://35.197.150.118/applicant', {
           headers: {
             token: localStorage.getItem('adminToken')
           }
@@ -61,7 +61,7 @@ export default {
 
     getApplicant ({ commit }, id) {
       return new Promise((resolve, reject) => {
-        axios.get(`http://localhost:3000/applicant/${id}`, {
+        axios.get(`http://35.197.150.118/applicant/${id}`, {
           headers: {
             token: localStorage.getItem('adminToken')
           }
@@ -79,7 +79,7 @@ export default {
     createApplicant ({ commit }, payload) {
       commit('setLoading', true)
       return new Promise((resolve, reject) => {
-        axios.post('http://localhost:3000/applicant', payload, {
+        axios.post('http://35.197.150.118/applicant', payload, {
           headers: {
             token: localStorage.getItem('adminToken')
           }
@@ -100,7 +100,7 @@ export default {
       return new Promise((resolve, reject) => {
         let id = payload._id
         delete payload._id
-        axios.delete(`http://localhost:3000/applicant/${id}`, {
+        axios.delete(`http://35.197.150.118/applicant/${id}`, {
           headers: {
             token: localStorage.getItem('adminToken')
           }
