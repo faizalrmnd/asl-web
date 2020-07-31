@@ -1010,6 +1010,10 @@ accepts@~1.3.4, accepts@~1.3.5:
     mime-types "~2.1.18"
     negotiator "0.6.1"
 
+accounting@0.4.1:
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/accounting/-/accounting-0.4.1.tgz#87dd4103eff7f4460f1e186f5c677ed6cf566883"
+
 acorn-dynamic-import@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/acorn-dynamic-import/-/acorn-dynamic-import-3.0.0.tgz#901ceee4c7faaef7e07ad2a47e890675da50a278"
@@ -1389,8 +1393,8 @@ bluebird@^3.1.1, bluebird@^3.5.1:
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.5.1.tgz#d9551f9de98f1fcda1e683d17ee91a0602ee2eb9"
 
 bn.js@^4.0.0, bn.js@^4.1.0, bn.js@^4.1.1, bn.js@^4.4.0:
-  version "4.11.8"
-  resolved "https://registry.yarnpkg.com/bn.js/-/bn.js-4.11.8.tgz#2cde09eb5ee341f484746bb0309b3253b1b1442f"
+  version "4.11.9"
+  resolved "https://registry.yarnpkg.com/bn.js/-/bn.js-4.11.9.tgz#26d556829458f9d1e81fc48952493d0ba3507828"
 
 body-parser@1.18.2:
   version "1.18.2"
@@ -1879,7 +1883,7 @@ compressible@~2.0.13:
 
 compression@^1.5.2:
   version "1.7.2"
-  resolved "http://registry.npmjs.org/compression/-/compression-1.7.2.tgz#aaffbcd6aaf854b44ebb280353d5ad1651f59a69"
+  resolved "https://registry.npmjs.org/compression/-/compression-1.7.2.tgz#aaffbcd6aaf854b44ebb280353d5ad1651f59a69"
   dependencies:
     accepts "~1.3.4"
     bytes "3.0.0"
@@ -2456,8 +2460,8 @@ elegant-spinner@^1.0.1:
   resolved "https://registry.yarnpkg.com/elegant-spinner/-/elegant-spinner-1.0.1.tgz#db043521c95d7e303fd8f345bedc3349cfb0729e"
 
 elliptic@^6.0.0:
-  version "6.4.0"
-  resolved "https://registry.yarnpkg.com/elliptic/-/elliptic-6.4.0.tgz#cac9af8762c85836187003c8dfe193e5e2eae5df"
+  version "6.5.3"
+  resolved "https://registry.yarnpkg.com/elliptic/-/elliptic-6.5.3.tgz#cb59eb2efdaf73a0bd78ccd7015a62ad6e0f93d6"
   dependencies:
     bn.js "^4.4.0"
     brorand "^1.0.1"
@@ -3370,11 +3374,11 @@ hash-sum@^1.0.2:
   resolved "https://registry.yarnpkg.com/hash-sum/-/hash-sum-1.0.2.tgz#33b40777754c6432573c120cc3808bbd10d47f04"
 
 hash.js@^1.0.0, hash.js@^1.0.3:
-  version "1.1.3"
-  resolved "https://registry.yarnpkg.com/hash.js/-/hash.js-1.1.3.tgz#340dedbe6290187151c1ea1d777a3448935df846"
+  version "1.1.7"
+  resolved "https://registry.yarnpkg.com/hash.js/-/hash.js-1.1.7.tgz#0babca538e8d4ee4a0f8988d68866537a003cf42"
   dependencies:
     inherits "^2.0.3"
-    minimalistic-assert "^1.0.0"
+    minimalistic-assert "^1.0.1"
 
 he@1.1.x, he@^1.1.0:
   version "1.1.1"
@@ -3575,13 +3579,17 @@ inflight@^1.0.4:
     once "^1.3.0"
     wrappy "1"
 
-inherits@2, inherits@2.0.3, inherits@^2.0.1, inherits@^2.0.3, inherits@~2.0.1, inherits@~2.0.3:
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/inherits/-/inherits-2.0.3.tgz#633c2c83e3da42a502f52466022480f4208261de"
+inherits@2, inherits@^2.0.1, inherits@^2.0.3, inherits@~2.0.1, inherits@~2.0.3:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/inherits/-/inherits-2.0.4.tgz#0fa2c64f932917c3433a0ded55363aae37416b7c"
 
 inherits@2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/inherits/-/inherits-2.0.1.tgz#b17d08d326b4423e568eff719f91b0b1cbdf69f1"
+
+inherits@2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/inherits/-/inherits-2.0.3.tgz#633c2c83e3da42a502f52466022480f4208261de"
 
 ini@~1.3.0:
   version "1.3.5"
@@ -3711,6 +3719,16 @@ is-descriptor@^1.0.0, is-descriptor@^1.0.2:
 is-directory@^0.3.1:
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/is-directory/-/is-directory-0.3.1.tgz#61339b6f2475fc772fd9c9d83f5c8575dc154ae1"
+
+is-dom-node-list@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/is-dom-node-list/-/is-dom-node-list-1.2.1.tgz#141ded0c66de759d0976800d21370bb908f2950f"
+  dependencies:
+    is-dom-node "^1.0.4"
+
+is-dom-node@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/is-dom-node/-/is-dom-node-1.0.4.tgz#abb18af7133f1e687610cfeb274da1ced342f1c5"
 
 is-dotfile@^1.0.0:
   version "1.0.3"
@@ -4488,7 +4506,7 @@ mini-css-extract-plugin@^0.4.0:
     loader-utils "^1.1.0"
     webpack-sources "^1.1.0"
 
-minimalistic-assert@^1.0.0:
+minimalistic-assert@^1.0.0, minimalistic-assert@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/minimalistic-assert/-/minimalistic-assert-1.0.1.tgz#2e194de044626d4a10e7f7fbc00ce73e83e4d5c7"
 
@@ -4516,6 +4534,10 @@ minipass@^2.2.1, minipass@^2.3.3:
   dependencies:
     safe-buffer "^5.1.2"
     yallist "^3.0.0"
+
+miniraf@1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/miniraf/-/miniraf-1.0.0.tgz#5d88e108bbdcb55b4a2ff3da337f24a13a3377e1"
 
 minizlib@^1.1.0:
   version "1.1.0"
@@ -4550,6 +4572,10 @@ mkdirp@0.5.1, mkdirp@0.5.x, mkdirp@^0.5.0, mkdirp@^0.5.1, mkdirp@~0.5.0, mkdirp@
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-0.5.1.tgz#30057438eac6cf7f8c4767f38648d6697d75c903"
   dependencies:
     minimist "0.0.8"
+
+moment@^2.19.2:
+  version "2.27.0"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.27.0.tgz#8bff4e3e26a236220dfe3e36de756b6ebaa0105d"
 
 move-concurrently@^1.0.1:
   version "1.0.1"
@@ -4865,7 +4891,7 @@ once@^1.3.0, once@^1.3.1, once@^1.4.0:
 
 onetime@^1.0.0:
   version "1.1.0"
-  resolved "http://registry.npmjs.org/onetime/-/onetime-1.1.0.tgz#a1f7838f8314c516f05ecefcbc4ccfe04b4ed789"
+  resolved "https://registry.npmjs.org/onetime/-/onetime-1.1.0.tgz#a1f7838f8314c516f05ecefcbc4ccfe04b4ed789"
 
 onetime@^2.0.0:
   version "2.0.1"
@@ -5793,6 +5819,10 @@ relateurl@0.2.x:
   version "0.2.7"
   resolved "https://registry.yarnpkg.com/relateurl/-/relateurl-0.2.7.tgz#54dbf377e51440aca90a4cd274600d3ff2d888a9"
 
+rematrix@0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/rematrix/-/rematrix-0.3.0.tgz#4f3f9156aa80ded8a8ca23785f48c6012b6dea4a"
+
 remove-trailing-separator@^1.0.1:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/remove-trailing-separator/-/remove-trailing-separator-1.1.0.tgz#c24bce2a283adad5bc3f58e0d48249b92379d8ef"
@@ -5998,6 +6028,14 @@ schema-utils@^0.4.0, schema-utils@^0.4.2, schema-utils@^0.4.3, schema-utils@^0.4
   dependencies:
     ajv "^6.1.0"
     ajv-keywords "^3.1.0"
+
+scrollreveal@^4.0.2:
+  version "4.0.7"
+  resolved "https://registry.yarnpkg.com/scrollreveal/-/scrollreveal-4.0.7.tgz#a1e1a969431ec3b1dc6c19d8d36ed8fd8cfe4412"
+  dependencies:
+    miniraf "1.0.0"
+    rematrix "0.3.0"
+    tealight "0.3.6"
 
 select-hose@^2.0.0:
   version "2.0.0"
@@ -6512,6 +6550,13 @@ tar@^4:
     safe-buffer "^5.1.2"
     yallist "^3.0.2"
 
+tealight@0.3.6:
+  version "0.3.6"
+  resolved "https://registry.yarnpkg.com/tealight/-/tealight-0.3.6.tgz#14c8071ce3c188972a5cb7d8a5668ca2820b4292"
+  dependencies:
+    is-dom-node "^1.0.4"
+    is-dom-node-list "^1.2.1"
+
 text-table@~0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/text-table/-/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
@@ -6837,6 +6882,10 @@ vary@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/vary/-/vary-1.1.2.tgz#2299f02c6ded30d4a5961b0b9f74524a18f634fc"
 
+vee-validate@^2.1.0-beta.5:
+  version "2.2.15"
+  resolved "https://registry.yarnpkg.com/vee-validate/-/vee-validate-2.2.15.tgz#dc6c925d21e57288d3308fe5a39a0941036c575a"
+
 vendors@^1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/vendors/-/vendors-1.0.2.tgz#7fcb5eef9f5623b156bcea89ec37d63676f21801"
@@ -6854,6 +6903,16 @@ vm-browserify@0.0.4:
   resolved "https://registry.yarnpkg.com/vm-browserify/-/vm-browserify-0.0.4.tgz#5d7ea45bbef9e4a6ff65f95438e0a87c357d5a73"
   dependencies:
     indexof "0.0.1"
+
+vue-carousel@^0.9.0:
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/vue-carousel/-/vue-carousel-0.9.0.tgz#3a81b48138a70af44de92cea43f70bf4e4daaf46"
+
+vue-currency-filter@^2.2.6:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/vue-currency-filter/-/vue-currency-filter-2.3.0.tgz#4c677210ea8503e3d492524493212c4f64413cc3"
+  dependencies:
+    accounting "0.4.1"
 
 vue-eslint-parser@^2.0.3:
   version "2.0.3"
@@ -6880,9 +6939,27 @@ vue-loader@^15.2.0:
     vue-hot-reload-api "^2.3.0"
     vue-style-loader "^4.1.0"
 
+vue-moment@^4.0.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/vue-moment/-/vue-moment-4.1.0.tgz#092a8ff723a96c6f85a0a8e23ad30f0bf320f3b0"
+  dependencies:
+    moment "^2.19.2"
+
+vue-paginate@^3.6.0:
+  version "3.6.0"
+  resolved "https://registry.yarnpkg.com/vue-paginate/-/vue-paginate-3.6.0.tgz#254aa144e4f92efe4b2c89fb04a6399e19319c0d"
+  dependencies:
+    vue "2.3.3"
+
 vue-router@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-3.0.1.tgz#d9b05ad9c7420ba0f626d6500d693e60092cc1e9"
+
+vue-scroll-reveal@^1.0.8:
+  version "1.0.11"
+  resolved "https://registry.yarnpkg.com/vue-scroll-reveal/-/vue-scroll-reveal-1.0.11.tgz#c2b0b78eff0d65381ba0bbce0d8801023aac649b"
+  dependencies:
+    scrollreveal "^4.0.2"
 
 vue-style-loader@^4.1.0:
   version "4.1.0"
@@ -6901,6 +6978,14 @@ vue-template-compiler@^2.5.16:
 vue-template-es2015-compiler@^1.6.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.6.0.tgz#dc42697133302ce3017524356a6c61b7b69b4a18"
+
+vue-truncate-filter@^1.1.7:
+  version "1.1.7"
+  resolved "https://registry.yarnpkg.com/vue-truncate-filter/-/vue-truncate-filter-1.1.7.tgz#e365fd2d4520c017293308e0ecbb1dd6176c3af2"
+
+vue@2.3.3:
+  version "2.3.3"
+  resolved "https://registry.yarnpkg.com/vue/-/vue-2.3.3.tgz#d1eaa8fde5240735a4563e74f2c7fead9cbb064c"
 
 vue@^2.5.16:
   version "2.5.16"
